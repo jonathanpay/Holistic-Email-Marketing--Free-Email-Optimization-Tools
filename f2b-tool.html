@@ -1,0 +1,81 @@
+<div id="feature-to-benefit-tool">
+    <h3>Feature-to-Benefit Converter</h3>
+    <p>Enter a feature of your product or service, and we’ll transform it into a compelling customer benefit.</p>
+    <input type="text" id="feature-input" placeholder="Enter a feature...">
+    <button id="feature-convert-button">Convert</button>
+    <div id="benefit-output"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function convertFeatureToBenefit(feature) {
+            if (!feature) return "Please enter a feature to convert.";
+
+            const categories = {
+                "time-saving": ["automation", "workflow", "schedule", "auto"],
+                "ease-of-use": ["simple", "easy", "intuitive", "user-friendly"],
+                "performance": ["fast", "real-time", "powerful", "efficient"],
+                "cost-saving": ["affordable", "save money", "budget", "cost-effective"],
+                "security": ["secure", "encryption", "protected", "privacy"]
+            };
+
+            const templates = {
+                "time-saving": [
+                    "{feature} helps you save time and focus on what really matters.",
+                    "With {feature}, you can automate tasks and increase efficiency.",
+                    "Never waste time again—{feature} streamlines your workflow.",
+                    "{feature} eliminates repetitive tasks so you can work smarter, not harder.",
+                    "Maximise productivity with {feature}, freeing up valuable time for bigger priorities."
+                ],
+                "ease-of-use": [
+                    "{feature} makes your experience seamless and stress-free.",
+                    "Enjoy intuitive design with {feature}, making it easier than ever to use.",
+                    "{feature} eliminates the learning curve, so you can get started instantly.",
+                    "Simplify complex tasks effortlessly with {feature}—no expertise required.",
+                    "{feature} is designed with ease in mind, ensuring smooth interactions every time."
+                ],
+                "performance": [
+                    "{feature} delivers top-tier performance, ensuring better results.",
+                    "Achieve peak efficiency with {feature}, designed for high performance.",
+                    "{feature} enhances productivity by working smarter, not harder.",
+                    "Get lightning-fast results with {feature}, optimised for peak speed.",
+                    "{feature} ensures consistent, reliable performance, no matter the challenge."
+                ],
+                "cost-saving": [
+                    "{feature} helps you reduce costs while maintaining high quality.",
+                    "Save money with {feature}, offering cost-effective solutions.",
+                    "Maximise value with {feature}, delivering great benefits at a lower price.",
+                    "{feature} provides premium results without the premium price tag.",
+                    "Cut expenses without compromise—{feature} keeps your budget in check."
+                ],
+                "security": [
+                    "{feature} keeps your data safe and protected at all times.",
+                    "Rest easy knowing {feature} ensures your privacy and security.",
+                    "With {feature}, you gain peace of mind knowing your information is secure.",
+                    "{feature} provides robust protection, guarding against threats and breaches.",
+                    "Trust {feature} to safeguard your assets with industry-leading security measures."
+                ]
+            };
+
+            let matchedCategory = "";
+            Object.keys(categories).forEach(category => {
+                categories[category].forEach(keyword => {
+                    if (feature.toLowerCase().includes(keyword)) {
+                        matchedCategory = category;
+                    }
+                });
+            });
+
+            const selectedTemplates = matchedCategory ? templates[matchedCategory] : templates["ease-of-use"];
+            const randomIndex = Math.floor(Math.random() * selectedTemplates.length);
+            return selectedTemplates[randomIndex].replace("{feature}", feature);
+        }
+
+        document.getElementById("feature-convert-button").addEventListener("click", function() {
+            const inputFeature = document.getElementById("feature-input").value.trim();
+            const result = convertFeatureToBenefit(inputFeature);
+            document.getElementById("benefit-output").innerHTML = `<p><strong>Benefit:</strong> ${result}</p>`;
+        });
+    });
+
+</script>

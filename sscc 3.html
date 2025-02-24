@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistical Significance Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Statistical Significance Calculator</h2>
+        <label>Sample Size:</label>
+        <input type="number" id="sampleSize" placeholder="Enter sample size" required>
+        
+        <label>Control (%):</label>
+        <input type="number" id="controlRate" placeholder="Enter control rate" required>
+        
+        <label>Variant (%):</label>
+        <input type="number" id="variantRate" placeholder="Enter variant rate" required>
+        
+        <button onclick="calculateConfidence()">Calculate</button>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateConfidence() {
+            let sampleSize = parseFloat(document.getElementById("sampleSize").value);
+            let controlRate = parseFloat(document.getElementById("controlRate").value) / 100;
+            let variantRate = parseFloat(document.getElementById("variantRate").value) / 100;
+
+            if (isNaN(sampleSize) || isNaN(controlRate) || isNaN(variantRate) || sampleSize <= 0) {
+                document.getElementById("result").innerText = "Please enter valid inputs.";
+                return;
+            }
+
+            let controlSuccess = controlRate * sampleSize;
+            let variantSuccess = variantRate * sampleSize;
+            let pooledRate = (controlSuccess + variantSuccess) / (2 * sampleSize);
+
+            let standardError = Math.sqrt((2 * pooledRate * (1 - pooledRate)) / sampleSize);
+            let zScore = (variantRate - controlRate) / standardError;
+
+            let confidence = (1 - (1 / (Math.exp(zScore * zScore / 2)))) * 100;
+
+            let resultText = "";
+            if (confidence < 95) {
+                resultText = "Not Confident";
+            } else if (confidence >= 95 && confidence < 99) {
+                resultText = "At least 95% Confident";
+            } else {
+                resultText = "99% Confident";
+            }
+
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
