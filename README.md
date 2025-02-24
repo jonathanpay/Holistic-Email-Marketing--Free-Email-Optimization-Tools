@@ -1,0 +1,2 @@
+# Holistic Email Marketing: Free Email Optimization Tools
+ This repository houses a collection of free email marketing optimization tools developed by Holistic Email Marketing to help marketers craft more effective, engaging, and high-performing email content. These tools are designed to enhance clarity, tone, readability, and personalization, empowering businesses to connect with their audiences more effectively.
