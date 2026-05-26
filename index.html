@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Email Optimisation Tools — Holistic Email Marketing</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html, body { margin: 0; padding: 0; }
+
+    /* ---- Header ---- */
+    .site-header {
+      padding: var(--hem-s-5) var(--hem-s-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--hem-divider-soft);
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: var(--hem-s-4);
+      text-decoration: none;
+    }
+    .brand-wordmark {
+      font-size: 11px;
+      font-weight: var(--hem-w-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hem-ink);
+      line-height: 1.3;
+    }
+    .brand-wordmark em {
+      display: block;
+      font-style: italic;
+      font-weight: var(--hem-w-regular);
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: var(--hem-plum-soft);
+      font-size: 10px;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: var(--hem-s-9) var(--hem-s-8) var(--hem-s-7);
+      text-align: center;
+    }
+    .hero .kicker { margin-bottom: var(--hem-s-4); }
+    .hero h1 { margin-bottom: var(--hem-s-4); }
+    .hero .lead {
+      font-size: var(--hem-text-lg);
+      color: var(--hem-fg-2);
+      line-height: var(--hem-lh-normal);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ---- Tools grid ---- */
+    .tools-section {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 var(--hem-s-8) var(--hem-s-9);
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--hem-s-5);
+    }
+    .tool-card {
+      background: var(--hem-bg);
+      border-radius: var(--hem-r-lg);
+      border: 1px solid var(--hem-divider-soft);
+      box-shadow: var(--hem-shadow-sm);
+      padding: var(--hem-s-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--hem-s-4);
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow var(--hem-dur-base) var(--hem-ease),
+                  transform var(--hem-dur-base) var(--hem-ease);
+    }
+    .tool-card:hover {
+      box-shadow: var(--hem-shadow-md);
+      transform: translateY(-2px);
+    }
+    .tool-card .title {
+      font-size: var(--hem-h3);
+      font-weight: var(--hem-w-semibold);
+      color: var(--hem-fg-1);
+      line-height: var(--hem-lh-snug);
+      margin: 0;
+    }
+    .tool-card .desc {
+      font-size: var(--hem-text-sm);
+      color: var(--hem-fg-2);
+      line-height: var(--hem-lh-loose);
+      flex: 1;
+      margin: 0;
+    }
+    .tool-card .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: var(--hem-s-4);
+      border-top: 1px solid var(--hem-divider-soft);
+    }
+    .open-link {
+      font-size: var(--hem-text-sm);
+      font-weight: var(--hem-w-semibold);
+      color: var(--hem-ink);
+      text-decoration: none;
+      transition: color var(--hem-dur-fast) var(--hem-ease);
+    }
+    .tool-card:hover .open-link { color: var(--hem-devise); }
+
+    /* ---- Divider ---- */
+    .section-rule {
+      max-width: 1040px;
+      margin: 0 auto var(--hem-s-7);
+      padding: 0 var(--hem-s-8);
+    }
+    .section-rule hr {
+      border: none;
+      border-top: 1px solid var(--hem-divider);
+      margin: 0;
+    }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      padding: var(--hem-s-7) var(--hem-s-8);
+      border-top: 1px solid var(--hem-divider);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--hem-s-5);
+    }
+    .footer-brand { display: flex; align-items: center; gap: var(--hem-s-3); }
+    .footer-wordmark {
+      font-size: 11px;
+      font-weight: var(--hem-w-bold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--hem-ink);
+    }
+    .footer-tagline { font-size: var(--hem-text-sm); color: var(--hem-fg-3); font-style: italic; }
+
+    @media (max-width: 680px) {
+      .tools-grid { grid-template-columns: 1fr; }
+      .site-header, .site-footer { padding: var(--hem-s-4); }
+      .brand-wordmark em { display: none; }
+      .hero, .tools-section, .section-rule { padding-left: var(--hem-s-4); padding-right: var(--hem-s-4); }
+    }
+  </style>
+</head>
+<body class="hem">
+
+  <header class="site-header">
+    <a href="index.html" class="brand-lockup">
+      <span class="hem-mark hem-mark--sm"><i></i></span>
+      <span class="brand-wordmark">Holistic Email Marketing<em>— a practitioner-led consultancy</em></span>
+    </a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="kicker">Free Tools</p>
+      <h1>Sharpen Your Email Marketing</h1>
+      <p class="lead">Four practical tools to help you analyse, improve, and test your email copy. No sign-up required.</p>
+    </section>
+
+    <div class="section-rule"><hr></div>
+
+    <section class="tools-section">
+      <div class="tools-grid">
+
+        <a href="wewe-tool.html" class="tool-card">
+          <div><span class="hem-pill hem-pill--discover">Discover</span></div>
+          <h2 class="title">We-We Calculator</h2>
+          <p class="desc">Is your copy talking about you, or to your reader? Paste your email and see the brand vs. customer balance instantly.</p>
+          <div class="card-foot">
+            <span class="open-link">Open tool →</span>
+          </div>
+        </a>
+
+        <a href="ers-tool-feedback.html" class="tool-card">
+          <div><span class="hem-pill hem-pill--discover">Discover</span></div>
+          <h2 class="title">Email Readability Score</h2>
+          <p class="desc">Paste your email to check its reading level against three industry-standard formulas — Flesch-Kincaid, Gunning Fog, and SMOG.</p>
+          <div class="card-foot">
+            <span class="open-link">Open tool →</span>
+          </div>
+        </a>
+
+        <a href="f2b-tool.html" class="tool-card">
+          <div><span class="hem-pill hem-pill--devise">Devise</span></div>
+          <h2 class="title">Feature-to-Benefit Converter</h2>
+          <p class="desc">Enter a product or service feature and get a customer-benefit statement that speaks to your reader's real needs.</p>
+          <div class="card-foot">
+            <span class="open-link">Open tool →</span>
+          </div>
+        </a>
+
+        <a href="sscc.html" class="tool-card">
+          <div><span class="hem-pill hem-pill--develop">Develop</span></div>
+          <h2 class="title">Statistical Significance Calculator</h2>
+          <p class="desc">Enter your sample size and conversion rates to find out whether your A/B test result is statistically significant before you act on it.</p>
+          <div class="card-foot">
+            <span class="open-link">Open tool →</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <span class="hem-mark hem-mark--sm"><i></i></span>
+      <span class="footer-wordmark">Holistic Email Marketing</span>
+    </div>
+    <span class="footer-tagline">Strategy, data, creativity — converging.</span>
+  </footer>
+
+</body>
+</html>

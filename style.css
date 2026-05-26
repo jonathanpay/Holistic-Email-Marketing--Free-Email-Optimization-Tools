@@ -1,0 +1,458 @@
+/* ============================================================
+   Holistic Email Marketing — Colors & Typography
+   Tokens for the consulting brand (--hem-* namespace).
+   Single source of truth. Import this file in every artifact.
+
+   Family resemblance to the Academy system on purpose:
+   same typeface (CMG Sans), same warm-plum text, same pill CTAs.
+   What changed: purple-led palette → ink + warm paper.
+   The Discover / Devise / Develop trio (green / orange / red) is
+   promoted to a first-class brand asset.
+   ============================================================ */
+
+/* CMG Sans — primary brand typeface.
+   Two weights are licensed: Regular (400) and SemiBold (600).
+   Italics + heavier weights are synthesised by the browser. Avoid pushing
+   beyond 600 — when you need more emphasis use color or kicker treatment. */
+@font-face {
+  font-family: 'CMG Sans';
+  src: url('fonts/CMGSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CMG Sans';
+  src: url('fonts/CMGSans-SemiBold.ttf') format('truetype');
+  font-weight: 600 900;       /* range so 700/800/900 still resolve to SemiBold */
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- BRAND NEUTRALS ----
+     Ink replaces Academy Purple as the primary brand color. Warm paper
+     replaces clean white as the dominant surface. Plum body-text is kept
+     verbatim from the Academy — that warm purple-brown is the through-line
+     between the two brands. */
+  --hem-ink:           #1C1F2C;  /* Primary brand color. CTAs, headings, mark. */
+  --hem-ink-soft:      #353849;  /* Hover / secondary nav text. */
+  --hem-ink-deep:      #0E101A;  /* Pressed state under primary CTA. */
+
+  --hem-plum:          #3D2A35;  /* Body text. Inherited from Academy on purpose. */
+  --hem-plum-soft:     #5C4651;  /* Secondary text. */
+  --hem-plum-muted:    #897680;  /* Tertiary text / captions / metadata. */
+
+  --hem-paper:         #FBF8F2;  /* Warm off-white. Primary page background. */
+  --hem-paper-2:       #F4ECD9;  /* Warm cream. Feature panels, pull-quotes. */
+  --hem-bg:            #FFFFFF;  /* Pure white. Cards and inputs sit on this. */
+  --hem-divider:       #E3DACB;  /* Warm hairline. */
+  --hem-divider-soft:  #EFE7D5;  /* Hairline on white surfaces. */
+
+  /* ---- THE TRIAD ----
+     Discover / Devise / Develop. The consulting brand's signature device.
+     Refined from the green / orange / red roundels on the live site —
+     deeper, less saturated, premium-feeling. Treat these as a closed set:
+     never repurpose for unrelated UI state. */
+  --hem-discover:      #1F8F4B;  /* Discover — measured green. */
+  --hem-devise:        #D26A2A;  /* Devise — warm orange. */
+  --hem-develop:       #B83A3A;  /* Develop — brick red. */
+
+  --hem-discover-deep: #156034;
+  --hem-devise-deep:   #A24D17;
+  --hem-develop-deep:  #8A2828;
+
+  --hem-discover-tint: #E5F0E8;  /* Pill / wash. */
+  --hem-devise-tint:   #F8E7D5;
+  --hem-develop-tint:  #F4DCD8;
+
+  /* ---- SEMANTIC ALIASES ---- */
+  --hem-fg-1: var(--hem-plum);
+  --hem-fg-2: var(--hem-plum-soft);
+  --hem-fg-3: var(--hem-plum-muted);
+  --hem-fg-on-ink:    #FBF8F2;     /* paper, not pure white, on ink */
+  --hem-fg-on-paper:  var(--hem-ink);
+
+  --hem-link:        var(--hem-ink);
+  --hem-link-hover:  var(--hem-devise);   /* warm devise-orange for link hover */
+
+  --hem-success: var(--hem-discover);
+  --hem-info:    #2E6BA8;
+  --hem-warning: var(--hem-devise);
+  --hem-danger:  var(--hem-develop);
+
+  /* ---- TYPE ---- */
+  --hem-font-sans: 'CMG Sans', 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Base / body */
+  --hem-text-xs:   12px;
+  --hem-text-sm:   14px;
+  --hem-text-base: 16px;
+  --hem-text-lg:   18px;
+  --hem-text-xl:   20px;
+
+  /* Display scale — slightly larger than Academy. Boutique consultancy
+     headlines lean editorial; we let display type breathe. */
+  --hem-display-1: clamp(44px, 6vw, 84px);   /* hero — full editorial scale */
+  --hem-display-2: clamp(34px, 4.2vw, 60px); /* section opener */
+  --hem-h1:        clamp(28px, 3.1vw, 44px);
+  --hem-h2:        clamp(22px, 2.3vw, 32px);
+  --hem-h3:        20px;
+  --hem-h4:        16px;
+
+  /* Line heights */
+  --hem-lh-tight:  1.05;   /* tighter on display — editorial */
+  --hem-lh-snug:   1.2;
+  --hem-lh-normal: 1.55;
+  --hem-lh-loose:  1.7;
+
+  /* Weight — CMG Sans ships in 400 + 600. Tokens above 600 still resolve
+     via the font-weight range on the SemiBold face. */
+  --hem-w-regular:  400;
+  --hem-w-medium:   400;
+  --hem-w-semibold: 600;
+  --hem-w-bold:     600;
+  --hem-w-black:    600;
+
+  /* ---- SPACING (8px base) ---- */
+  --hem-s-1:  4px;
+  --hem-s-2:  8px;
+  --hem-s-3:  12px;
+  --hem-s-4:  16px;
+  --hem-s-5:  24px;
+  --hem-s-6:  32px;
+  --hem-s-7:  48px;
+  --hem-s-8:  64px;
+  --hem-s-9:  96px;
+  --hem-s-10: 128px;
+
+  /* ---- RADII ---- */
+  --hem-r-sm:    6px;
+  --hem-r-md:    10px;
+  --hem-r-lg:    16px;
+  --hem-r-xl:    24px;
+  --hem-r-pill:  999px;
+
+  /* ---- SHADOWS ----
+     Tinted off the ink color, not pure black. Lighter than Academy —
+     boutique B2B is more restrained than education marketing. */
+  --hem-shadow-sm:  0 1px 2px rgba(28, 31, 44, 0.06), 0 1px 1px rgba(28, 31, 44, 0.04);
+  --hem-shadow-md:  0 4px 14px rgba(28, 31, 44, 0.08), 0 1px 3px rgba(28, 31, 44, 0.04);
+  --hem-shadow-lg:  0 16px 44px rgba(28, 31, 44, 0.12), 0 4px 10px rgba(28, 31, 44, 0.05);
+  --hem-shadow-ink: 0 12px 28px rgba(28, 31, 44, 0.22);
+  --hem-ring-focus: 0 0 0 3px rgba(28, 31, 44, 0.18);
+
+  /* ---- MOTION ---- */
+  --hem-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --hem-dur-fast: 140ms;
+  --hem-dur-base: 220ms;
+  --hem-dur-slow: 380ms;
+}
+
+/* ============================================================
+   Semantic base styles
+   ============================================================ */
+.hem, .hem * {
+  box-sizing: border-box;
+}
+.hem {
+  font-family: var(--hem-font-sans);
+  color: var(--hem-fg-1);
+  background: var(--hem-paper);
+  font-size: var(--hem-text-base);
+  line-height: var(--hem-lh-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.hem h1, .hem .h1 {
+  font-size: var(--hem-h1);
+  font-weight: var(--hem-w-bold);
+  line-height: var(--hem-lh-tight);
+  letter-spacing: -0.015em;
+  color: var(--hem-fg-1);
+  margin: 0 0 var(--hem-s-4);
+}
+.hem h2, .hem .h2 {
+  font-size: var(--hem-h2);
+  font-weight: var(--hem-w-bold);
+  line-height: var(--hem-lh-snug);
+  letter-spacing: -0.01em;
+  color: var(--hem-fg-1);
+  margin: 0 0 var(--hem-s-3);
+}
+.hem h3, .hem .h3 {
+  font-size: var(--hem-h3);
+  font-weight: var(--hem-w-semibold);
+  line-height: var(--hem-lh-snug);
+  color: var(--hem-fg-1);
+  margin: 0 0 var(--hem-s-2);
+}
+.hem h4, .hem .h4 {
+  font-size: var(--hem-h4);
+  font-weight: var(--hem-w-semibold);
+  line-height: var(--hem-lh-snug);
+  color: var(--hem-fg-1);
+  margin: 0 0 var(--hem-s-2);
+}
+.hem .display-1 {
+  font-size: var(--hem-display-1);
+  font-weight: var(--hem-w-bold);
+  line-height: var(--hem-lh-tight);
+  letter-spacing: -0.025em;
+  color: var(--hem-fg-1);
+}
+.hem .display-2 {
+  font-size: var(--hem-display-2);
+  font-weight: var(--hem-w-bold);
+  line-height: var(--hem-lh-tight);
+  letter-spacing: -0.02em;
+  color: var(--hem-fg-1);
+}
+.hem .eyebrow {
+  /* italic eyebrows are a brand voice signature */
+  font-style: italic;
+  font-weight: var(--hem-w-medium);
+  font-size: var(--hem-text-base);
+  color: var(--hem-plum-soft);
+  letter-spacing: 0.01em;
+}
+.hem .tagline {
+  /* italic subhead under a heading */
+  font-style: italic;
+  font-weight: var(--hem-w-semibold);
+  color: var(--hem-fg-2);
+}
+.hem .kicker {
+  /* uppercase mini-label */
+  font-size: var(--hem-text-xs);
+  font-weight: var(--hem-w-bold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hem-ink);
+}
+.hem .kicker--muted { color: var(--hem-fg-3); }
+.hem p, .hem .body {
+  font-size: var(--hem-text-base);
+  line-height: var(--hem-lh-loose);
+  color: var(--hem-fg-2);
+  margin: 0 0 var(--hem-s-4);
+}
+.hem .body-lg {
+  font-size: var(--hem-text-lg);
+  line-height: var(--hem-lh-normal);
+  color: var(--hem-fg-2);
+}
+.hem .caption {
+  font-size: var(--hem-text-sm);
+  color: var(--hem-fg-3);
+}
+.hem a {
+  color: var(--hem-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--hem-divider);
+  font-weight: var(--hem-w-semibold);
+  transition: color var(--hem-dur-fast) var(--hem-ease),
+              text-decoration-color var(--hem-dur-fast) var(--hem-ease);
+}
+.hem a:hover {
+  color: var(--hem-link-hover);
+  text-decoration-color: currentColor;
+}
+
+/* ============================================================
+   Core components
+   ============================================================ */
+
+/* Buttons — pill CTAs inherited from Academy. Primary is now ink,
+   not purple. The lift-on-hover is gentler (no purple glow). */
+.hem-btn,
+.hem a.hem-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--hem-s-2);
+  font-family: var(--hem-font-sans);
+  font-weight: var(--hem-w-semibold);
+  font-size: var(--hem-text-base);
+  line-height: 1;
+  padding: 14px 26px;
+  border-radius: var(--hem-r-pill);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--hem-dur-fast) var(--hem-ease),
+              background var(--hem-dur-base) var(--hem-ease),
+              box-shadow var(--hem-dur-base) var(--hem-ease),
+              color var(--hem-dur-base) var(--hem-ease);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.hem-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--hem-ring-focus);
+}
+.hem-btn--primary,
+.hem a.hem-btn--primary {
+  background: var(--hem-ink);
+  color: var(--hem-fg-on-ink);
+  box-shadow: var(--hem-shadow-ink);
+}
+.hem-btn--primary:hover,
+.hem a.hem-btn--primary:hover {
+  background: var(--hem-ink-deep);
+  color: var(--hem-fg-on-ink);
+  transform: translateY(-1px);
+}
+.hem-btn--primary:active { transform: translateY(0); }
+
+.hem-btn--secondary,
+.hem a.hem-btn--secondary {
+  background: transparent;
+  color: var(--hem-ink);
+  border-color: var(--hem-ink);
+}
+.hem-btn--secondary:hover,
+.hem a.hem-btn--secondary:hover {
+  background: var(--hem-ink);
+  color: var(--hem-fg-on-ink);
+}
+.hem-btn--ghost,
+.hem a.hem-btn--ghost {
+  background: transparent;
+  color: var(--hem-ink);
+  padding-left: 0;
+  padding-right: 0;
+  text-decoration: none;
+}
+.hem-btn--ghost:hover,
+.hem a.hem-btn--ghost:hover { color: var(--hem-devise); }
+
+.hem-btn--lg { padding: 18px 34px; font-size: var(--hem-text-lg); }
+.hem-btn--sm { padding: 10px 18px; font-size: var(--hem-text-sm); }
+
+/* Pills — the trio gets dedicated variants because Discover/Devise/Develop
+   are first-class brand assets, not utility chips. */
+.hem-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--hem-r-pill);
+  font-size: var(--hem-text-xs);
+  font-weight: var(--hem-w-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hem-pill::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.85;
+}
+.hem-pill--discover { background: var(--hem-discover-tint); color: var(--hem-discover-deep); }
+.hem-pill--devise   { background: var(--hem-devise-tint);   color: var(--hem-devise-deep); }
+.hem-pill--develop  { background: var(--hem-develop-tint);  color: var(--hem-develop-deep); }
+.hem-pill--neutral  { background: var(--hem-paper-2);       color: var(--hem-ink); }
+.hem-pill--ink      { background: var(--hem-ink);           color: var(--hem-fg-on-ink); }
+
+/* Cards. Hairline border + soft ink shadow. Featured uses warm cream. */
+.hem-card {
+  background: var(--hem-bg);
+  border-radius: var(--hem-r-lg);
+  border: 1px solid var(--hem-divider-soft);
+  box-shadow: var(--hem-shadow-sm);
+  padding: var(--hem-s-6);
+  transition: box-shadow var(--hem-dur-base) var(--hem-ease),
+              transform var(--hem-dur-base) var(--hem-ease);
+}
+.hem-card:hover {
+  box-shadow: var(--hem-shadow-md);
+  transform: translateY(-2px);
+}
+.hem-card--featured {
+  background: var(--hem-paper-2);
+  border: none;
+}
+.hem-card--ink {
+  background: var(--hem-ink);
+  color: var(--hem-fg-on-ink);
+  border: none;
+}
+.hem-card--ink h1, .hem-card--ink h2, .hem-card--ink h3, .hem-card--ink h4 { color: var(--hem-fg-on-ink); }
+.hem-card--ink p { color: rgba(251, 248, 242, 0.78); }
+
+/* Inputs — pill, like buttons. Focus draws an ink ring. */
+.hem-input {
+  font-family: var(--hem-font-sans);
+  font-size: var(--hem-text-base);
+  padding: 14px 20px;
+  border-radius: var(--hem-r-pill);
+  border: 1.5px solid var(--hem-divider);
+  background: var(--hem-bg);
+  color: var(--hem-fg-1);
+  width: 100%;
+  transition: border var(--hem-dur-base) var(--hem-ease),
+              box-shadow var(--hem-dur-base) var(--hem-ease);
+}
+.hem-input:focus {
+  outline: none;
+  border-color: var(--hem-ink);
+  box-shadow: var(--hem-ring-focus);
+}
+.hem-input::placeholder { color: var(--hem-fg-3); }
+
+/* ============================================================
+   Brand mark — the registration triad.
+   Three overlapping circles in the trio colors, with mix-blend-mode
+   so the overlaps print darker. Replaces the water-drop metaphor.
+   Pure CSS, scale via --size. Used as section opener, footer mark,
+   and as a small inline glyph next to display headings.
+   ============================================================ */
+.hem-mark {
+  --size: 48px;
+  position: relative;
+  display: inline-block;
+  width: calc(var(--size) * 1.7);
+  height: var(--size);
+  vertical-align: middle;
+  isolation: isolate;
+}
+.hem-mark::before,
+.hem-mark::after,
+.hem-mark > i {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+}
+.hem-mark::before { left: 0;                              background: var(--hem-discover); }
+.hem-mark > i     { left: calc(var(--size) * 0.35);       background: var(--hem-devise); }
+.hem-mark::after  { left: calc(var(--size) * 0.70);       background: var(--hem-develop); }
+.hem-mark--sm  { --size: 18px; }
+.hem-mark--md  { --size: 32px; }
+.hem-mark--lg  { --size: 72px; }
+.hem-mark--xl  { --size: 144px; }
+
+/* Solid (non-blended) variant for use on dark backgrounds where multiply
+   would disappear into the ink. */
+.hem-mark--solid::before,
+.hem-mark--solid::after,
+.hem-mark--solid > i {
+  mix-blend-mode: normal;
+}
+
+/* Section opener — display heading with a triad and a hairline rule
+   underneath. Editorial / book-cover feel. */
+.hem-section-opener {
+  border-top: 1px solid var(--hem-divider);
+  padding-top: var(--hem-s-6);
+  margin-bottom: var(--hem-s-7);
+}
+.hem-section-opener .hem-mark { margin-bottom: var(--hem-s-4); }

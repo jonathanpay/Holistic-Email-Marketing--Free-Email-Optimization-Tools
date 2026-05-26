@@ -1,0 +1,160 @@
+/* ============================================================
+   Tool Pages — Shared Layout
+   Load after style.css on every tool page.
+   ============================================================ */
+
+html, body { margin: 0; padding: 0; }
+
+/* ---- Header ---- */
+.site-header {
+  padding: var(--hem-s-5) var(--hem-s-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--hem-divider-soft);
+}
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: var(--hem-s-4);
+  text-decoration: none;
+}
+.brand-wordmark {
+  font-size: 11px;
+  font-weight: var(--hem-w-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hem-ink);
+  line-height: 1.3;
+}
+.brand-wordmark em {
+  display: block;
+  font-style: italic;
+  font-weight: var(--hem-w-regular);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--hem-plum-soft);
+  font-size: 10px;
+}
+.back-link {
+  font-size: var(--hem-text-sm);
+  font-weight: var(--hem-w-semibold);
+  color: var(--hem-ink);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity var(--hem-dur-fast) var(--hem-ease),
+              color var(--hem-dur-fast) var(--hem-ease);
+}
+.back-link:hover { opacity: 1; color: var(--hem-devise); }
+
+/* ---- Page layout ---- */
+.tool-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--hem-s-9) var(--hem-s-6) var(--hem-s-10);
+}
+
+/* ---- Tool header ---- */
+.tool-header { margin-bottom: var(--hem-s-7); }
+.tool-header .hem-pill { margin-bottom: var(--hem-s-4); }
+.tool-header h1 { margin-bottom: var(--hem-s-3); }
+.tool-header .lead {
+  font-size: var(--hem-text-lg);
+  color: var(--hem-fg-2);
+  line-height: var(--hem-lh-normal);
+  margin: 0;
+}
+
+/* ---- Tool card ---- */
+.tool-card {
+  background: var(--hem-bg);
+  border-radius: var(--hem-r-lg);
+  border: 1px solid var(--hem-divider-soft);
+  box-shadow: var(--hem-shadow-sm);
+  padding: var(--hem-s-7);
+}
+
+/* ---- Form elements ---- */
+.field-group { margin-bottom: var(--hem-s-5); }
+.field-label {
+  display: block;
+  font-size: var(--hem-text-sm);
+  font-weight: var(--hem-w-semibold);
+  color: var(--hem-fg-1);
+  margin-bottom: var(--hem-s-2);
+}
+.hem-textarea {
+  font-family: var(--hem-font-sans);
+  font-size: var(--hem-text-base);
+  padding: 14px 20px;
+  border-radius: var(--hem-r-md);
+  border: 1.5px solid var(--hem-divider);
+  background: var(--hem-bg);
+  color: var(--hem-fg-1);
+  width: 100%;
+  resize: vertical;
+  min-height: 160px;
+  box-sizing: border-box;
+  line-height: var(--hem-lh-normal);
+  transition: border var(--hem-dur-base) var(--hem-ease),
+              box-shadow var(--hem-dur-base) var(--hem-ease);
+}
+.hem-textarea:focus {
+  outline: none;
+  border-color: var(--hem-ink);
+  box-shadow: var(--hem-ring-focus);
+}
+.hem-textarea::placeholder { color: var(--hem-fg-3); }
+
+/* ---- Validation ---- */
+.error-msg {
+  display: none;
+  margin-top: var(--hem-s-3);
+  font-size: var(--hem-text-sm);
+  color: var(--hem-develop);
+}
+.error-msg.visible { display: block; }
+
+/* ---- Results ---- */
+.results { margin-top: var(--hem-s-6); display: none; }
+.results.visible { display: block; }
+.results-divider {
+  border: none;
+  border-top: 1px solid var(--hem-divider-soft);
+  margin: 0 0 var(--hem-s-5);
+}
+.results-label {
+  font-size: var(--hem-text-xs);
+  font-weight: var(--hem-w-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hem-fg-3);
+  margin: 0 0 var(--hem-s-5);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  padding: var(--hem-s-7) var(--hem-s-8);
+  border-top: 1px solid var(--hem-divider);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hem-s-5);
+}
+.footer-brand { display: flex; align-items: center; gap: var(--hem-s-3); }
+.footer-wordmark {
+  font-size: 11px;
+  font-weight: var(--hem-w-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hem-ink);
+}
+.footer-tagline { font-size: var(--hem-text-sm); color: var(--hem-fg-3); font-style: italic; }
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .site-header, .site-footer { padding: var(--hem-s-4); }
+  .brand-wordmark em { display: none; }
+  .tool-page { padding: var(--hem-s-6) var(--hem-s-4) var(--hem-s-8); }
+  .tool-card { padding: var(--hem-s-5); }
+}

@@ -1,98 +1,258 @@
-<div id="email-readability-tool">
-    <h3>Email Readability Score</h3>
-    <p>Paste your email copy below to check its readability level.</p>
-    <textarea id="readability-input" rows="6" cols="50" placeholder="Paste your email copy here..."></textarea>
-    <button id="readability-check-button">Check Readability</button>
-    <div id="readability-result"></div>
-</div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Email Readability Score — Holistic Email Marketing</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="tool-page.css">
+  <style>
+    /* ---- Scores grid ---- */
+    .scores-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--hem-s-4);
+    }
+    .score-item {
+      background: var(--hem-paper);
+      border-radius: var(--hem-r-md);
+      padding: var(--hem-s-4) var(--hem-s-5);
+    }
+    .score-item .score-kicker {
+      font-size: var(--hem-text-xs);
+      font-weight: var(--hem-w-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hem-fg-3);
+      margin: 0 0 var(--hem-s-2);
+    }
+    .score-item .score-value {
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: var(--hem-w-bold);
+      color: var(--hem-ink);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .score-item .score-desc {
+      font-size: var(--hem-text-sm);
+      color: var(--hem-fg-2);
+      margin: var(--hem-s-2) 0 0;
+      line-height: var(--hem-lh-snug);
+    }
+    .score-item--blended {
+      background: var(--hem-ink);
+      color: var(--hem-fg-on-ink);
+    }
+    .score-item--blended .score-kicker { color: rgba(251,248,242,0.55); }
+    .score-item--blended .score-value  { color: var(--hem-fg-on-ink); }
+    .score-item--blended .score-desc   { color: rgba(251,248,242,0.72); }
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    function calculateFleschKincaid(text) {
-        const words = text.split(/\s+/).length;
-        const sentences = text.split(/[.!?]+/).length - 1;
-        const syllables = text.toLowerCase().split(/[aeiouy]{1,2}/).length - 1;
-        
-        const score = 206.835 - (1.015 * (words / sentences)) - (84.6 * (syllables / words));
-        let gradeLevel = "";
-        if (score >= 90) gradeLevel = "Very Easy (5th grade)";
-        else if (score >= 80) gradeLevel = "Easy (6th grade)";
-        else if (score >= 70) gradeLevel = "Fairly Easy (7th grade)";
-        else if (score >= 60) gradeLevel = "Standard (8th-9th grade)";
-        else if (score >= 50) gradeLevel = "Fairly Difficult (10th-12th grade)";
-        else if (score >= 30) gradeLevel = "Difficult (College level)";
-        else gradeLevel = "Very Difficult (Advanced College Level)";
-        
-        return { score: score.toFixed(2), gradeLevel };
+    /* ---- Suggestions ---- */
+    .suggestions {
+      margin-top: var(--hem-s-5);
     }
-    
-    function calculateGunningFog(text) {
-        const words = text.split(/\s+/).length;
-        const sentences = text.split(/[.!?]+/).length - 1;
-        const complexWords = text.split(/\b/).filter(word => word.length > 6).length;
-        
-        const score = 0.4 * ((words / sentences) + 100 * (complexWords / words));
-        return score.toFixed(2);
+    .suggestions .suggestions-label {
+      font-size: var(--hem-text-xs);
+      font-weight: var(--hem-w-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hem-fg-3);
+      margin: 0 0 var(--hem-s-3);
     }
-    
-    function calculateSMOG(text) {
-        const sentences = text.split(/[.!?]+/).length - 1;
-        const complexWords = text.split(/\b/).filter(word => word.length > 6).length;
-        
-        const score = 1.0430 * Math.sqrt(complexWords * (30 / sentences)) + 3.1291;
-        return score.toFixed(2);
+    .suggestions ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--hem-s-3);
     }
-    
-    function calculateBlendedScore(fkScore, gfScore, smogScore) {
-        return ((parseFloat(fkScore) + parseFloat(gfScore) + parseFloat(smogScore)) / 3).toFixed(2);
+    .suggestions li {
+      display: flex;
+      gap: var(--hem-s-3);
+      align-items: flex-start;
+      font-size: var(--hem-text-sm);
+      color: var(--hem-fg-2);
+      background: var(--hem-devise-tint);
+      border-radius: var(--hem-r-sm);
+      padding: var(--hem-s-3) var(--hem-s-4);
+      line-height: var(--hem-lh-normal);
+    }
+    .suggestions li::before {
+      content: '→';
+      color: var(--hem-devise-deep);
+      font-weight: var(--hem-w-bold);
+      flex-shrink: 0;
     }
 
-    function analyzeText(text) {
-        let feedback = [];
-        
-        // Detect long sentences
-        const sentences = text.split(/[.!?]+/);
-        const longSentences = sentences.filter(sentence => sentence.split(/\s+/).length > 20);
-        if (longSentences.length > 0) {
-            feedback.push("Consider breaking up long sentences for better readability.");
-        }
-        
-        // Detect complex words
-        const complexWords = text.split(/\b/).filter(word => word.length > 12);
-        if (complexWords.length > 5) {
-            feedback.push("Your text contains many complex words. Try simplifying for better engagement.");
-        }
-        
-        // Detect passive voice (basic method)
-        const passivePatterns = /\b(is|was|were|been|being|are|be)\s\b\w+ed\b/gi;
-        const passiveMatches = text.match(passivePatterns);
-        if (passiveMatches && passiveMatches.length > 3) {
-            feedback.push("Your text uses passive voice frequently. Consider rewording to active voice for clarity.");
-        }
-        
-        return feedback;
+    @media (max-width: 480px) {
+      .scores-grid { grid-template-columns: 1fr; }
     }
-    
-    document.getElementById("readability-check-button").addEventListener("click", function() {
-        const inputText = document.getElementById("readability-input").value.trim();
-        if (!inputText) {
-            document.getElementById("readability-result").innerHTML = "<p style='color:red;'>Please enter text to analyze.</p>";
-            return;
-        }
-        
-        const fkResult = calculateFleschKincaid(inputText);
-        const gfScore = calculateGunningFog(inputText);
-        const smogScore = calculateSMOG(inputText);
-        const blendedScore = calculateBlendedScore(fkResult.score, gfScore, smogScore);
-        const feedback = analyzeText(inputText);
-        
-        document.getElementById("readability-result").innerHTML = `
-            <p><strong>Flesch-Kincaid Score:</strong> ${fkResult.score} (${fkResult.gradeLevel})</p>
-            <p><strong>Gunning Fog Score:</strong> ${gfScore}</p>
-            <p><strong>SMOG Score:</strong> ${smogScore}</p>
-            <p><strong>Blended Readability Score:</strong> ${blendedScore}</p>
-            ${feedback.length > 0 ? `<p><strong>Suggestions:</strong></p><ul><li>${feedback.join('</li><li>')}</li></ul>` : ''}
-        `;
+  </style>
+</head>
+<body class="hem">
+
+  <header class="site-header">
+    <a href="index.html" class="brand-lockup">
+      <span class="hem-mark hem-mark--sm"><i></i></span>
+      <span class="brand-wordmark">Holistic Email Marketing<em>— a practitioner-led consultancy</em></span>
+    </a>
+    <a href="index.html" class="back-link">← All Tools</a>
+  </header>
+
+  <main>
+    <div class="tool-page">
+
+      <header class="tool-header">
+        <span class="hem-pill hem-pill--discover">Discover</span>
+        <h1>Email Readability Score</h1>
+        <p class="lead">Check how easy your email copy is to read. Paste your text below to get scores from three industry-standard readability formulas, plus actionable suggestions.</p>
+      </header>
+
+      <div class="tool-card">
+        <div class="field-group">
+          <label class="field-label" for="readability-input">Your email copy</label>
+          <textarea class="hem-textarea" id="readability-input" placeholder="Paste your email copy here…" rows="8"></textarea>
+          <p class="error-msg" id="ers-error">Please paste some email copy before checking.</p>
+        </div>
+        <button class="hem-btn hem-btn--primary" id="ers-btn">Check Readability →</button>
+
+        <div class="results" id="ers-results">
+          <hr class="results-divider">
+          <p class="results-label">Readability Scores</p>
+
+          <div class="scores-grid">
+            <div class="score-item">
+              <p class="score-kicker">Flesch-Kincaid</p>
+              <div class="score-value" id="fk-score">—</div>
+              <p class="score-desc" id="fk-grade"></p>
+            </div>
+            <div class="score-item">
+              <p class="score-kicker">Gunning Fog</p>
+              <div class="score-value" id="gf-score">—</div>
+              <p class="score-desc">Grade level estimate</p>
+            </div>
+            <div class="score-item">
+              <p class="score-kicker">SMOG Index</p>
+              <div class="score-value" id="smog-score">—</div>
+              <p class="score-desc">Grade level estimate</p>
+            </div>
+            <div class="score-item score-item--blended">
+              <p class="score-kicker">Blended Score</p>
+              <div class="score-value" id="blended-score">—</div>
+              <p class="score-desc">Average across all three</p>
+            </div>
+          </div>
+
+          <div class="suggestions" id="suggestions-wrap" style="display:none">
+            <p class="suggestions-label">Suggestions</p>
+            <ul id="suggestions-list"></ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <span class="hem-mark hem-mark--sm"><i></i></span>
+      <span class="footer-wordmark">Holistic Email Marketing</span>
+    </div>
+    <span class="footer-tagline">Strategy, data, creativity — converging.</span>
+  </footer>
+
+  <script>
+    function calcFleschKincaid(text) {
+      const words     = text.split(/\s+/).length;
+      const sentences = text.split(/[.!?]+/).length - 1;
+      const syllables = text.toLowerCase().split(/[aeiouy]{1,2}/).length - 1;
+      const score     = 206.835 - (1.015 * (words / sentences)) - (84.6 * (syllables / words));
+
+      let grade = '';
+      if      (score >= 90) grade = 'Very Easy (5th grade)';
+      else if (score >= 80) grade = 'Easy (6th grade)';
+      else if (score >= 70) grade = 'Fairly Easy (7th grade)';
+      else if (score >= 60) grade = 'Standard (8th–9th grade)';
+      else if (score >= 50) grade = 'Fairly Difficult (10th–12th grade)';
+      else if (score >= 30) grade = 'Difficult (College level)';
+      else                  grade = 'Very Difficult (Advanced College)';
+
+      return { score: score.toFixed(1), grade };
+    }
+
+    function calcGunningFog(text) {
+      const words       = text.split(/\s+/).length;
+      const sentences   = text.split(/[.!?]+/).length - 1;
+      const complexWords = text.split(/\b/).filter(w => w.length > 6).length;
+      return (0.4 * ((words / sentences) + 100 * (complexWords / words))).toFixed(1);
+    }
+
+    function calcSMOG(text) {
+      const sentences   = text.split(/[.!?]+/).length - 1;
+      const complexWords = text.split(/\b/).filter(w => w.length > 6).length;
+      return (1.0430 * Math.sqrt(complexWords * (30 / sentences)) + 3.1291).toFixed(1);
+    }
+
+    function analyseText(text) {
+      const feedback = [];
+      const sentences   = text.split(/[.!?]+/);
+      const longSentences = sentences.filter(s => s.split(/\s+/).length > 20);
+      if (longSentences.length > 0)
+        feedback.push('Consider breaking up long sentences for better readability.');
+
+      const complexWords = text.split(/\b/).filter(w => w.length > 12);
+      if (complexWords.length > 5)
+        feedback.push('Your text contains many complex words. Try simplifying for better engagement.');
+
+      const passiveMatches = text.match(/\b(is|was|were|been|being|are|be)\s\b\w+ed\b/gi);
+      if (passiveMatches && passiveMatches.length > 3)
+        feedback.push('Your text uses passive voice frequently. Consider rewording to active voice for clarity.');
+
+      return feedback;
+    }
+
+    function check() {
+      const text    = document.getElementById('readability-input').value.trim();
+      const errorEl = document.getElementById('ers-error');
+      const resultsEl = document.getElementById('ers-results');
+
+      if (!text) {
+        errorEl.classList.add('visible');
+        resultsEl.classList.remove('visible');
+        return;
+      }
+      errorEl.classList.remove('visible');
+
+      const fk      = calcFleschKincaid(text);
+      const gf      = calcGunningFog(text);
+      const smog    = calcSMOG(text);
+      const blended = ((parseFloat(fk.score) + parseFloat(gf) + parseFloat(smog)) / 3).toFixed(1);
+      const feedback = analyseText(text);
+
+      document.getElementById('fk-score').textContent    = fk.score;
+      document.getElementById('fk-grade').textContent    = fk.grade;
+      document.getElementById('gf-score').textContent    = gf;
+      document.getElementById('smog-score').textContent  = smog;
+      document.getElementById('blended-score').textContent = blended;
+
+      const suggestWrap = document.getElementById('suggestions-wrap');
+      const suggestList = document.getElementById('suggestions-list');
+      if (feedback.length > 0) {
+        suggestList.innerHTML = feedback.map(s => `<li>${s}</li>`).join('');
+        suggestWrap.style.display = 'block';
+      } else {
+        suggestWrap.style.display = 'none';
+      }
+
+      resultsEl.classList.add('visible');
+    }
+
+    document.getElementById('ers-btn').addEventListener('click', check);
+    document.getElementById('readability-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && e.ctrlKey) check();
     });
-});
-</script>
+  </script>
+
+</body>
+</html>
