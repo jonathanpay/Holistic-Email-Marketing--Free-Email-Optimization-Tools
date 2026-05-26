@@ -1,81 +1,175 @@
-<div id="feature-to-benefit-tool">
-    <h3>Feature-to-Benefit Converter</h3>
-    <p>Enter a feature of your product or service, and we’ll transform it into a compelling customer benefit.</p>
-    <input type="text" id="feature-input" placeholder="Enter a feature...">
-    <button id="feature-convert-button">Convert</button>
-    <div id="benefit-output"></div>
-</div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature-to-Benefit Converter — Holistic Email Marketing</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="tool-page.css">
+  <style>
+    body { background: var(--hea-bg-alt); }
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        function convertFeatureToBenefit(feature) {
-            if (!feature) return "Please enter a feature to convert.";
+    /* ---- Benefit output ---- */
+    .benefit-quote {
+      position: relative;
+      background: var(--hea-bg-warm);
+      border-radius: var(--hea-r-lg);
+      padding: var(--hea-s-7) var(--hea-s-6) var(--hea-s-5);
+      font-size: var(--hea-text-lg);
+      line-height: var(--hea-lh-normal);
+      color: var(--hea-plum);
+      font-style: italic;
+    }
+    .benefit-quote::before {
+      content: '\201C';
+      position: absolute;
+      top: 0;
+      left: var(--hea-s-5);
+      font-size: 72px;
+      line-height: 1;
+      color: var(--hea-purple);
+      opacity: 0.2;
+      font-style: normal;
+      font-family: Georgia, serif;
+    }
+    .benefit-quote p { margin: 0; color: var(--hea-plum); font-size: var(--hea-text-lg); }
 
-            const categories = {
-                "time-saving": ["automation", "workflow", "schedule", "auto"],
-                "ease-of-use": ["simple", "easy", "intuitive", "user-friendly"],
-                "performance": ["fast", "real-time", "powerful", "efficient"],
-                "cost-saving": ["affordable", "save money", "budget", "cost-effective"],
-                "security": ["secure", "encryption", "protected", "privacy"]
-            };
+    .try-again-row {
+      margin-top: var(--hea-s-4);
+      display: flex;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+<body class="hea">
 
-            const templates = {
-                "time-saving": [
-                    "{feature} helps you save time and focus on what really matters.",
-                    "With {feature}, you can automate tasks and increase efficiency.",
-                    "Never waste time again—{feature} streamlines your workflow.",
-                    "{feature} eliminates repetitive tasks so you can work smarter, not harder.",
-                    "Maximise productivity with {feature}, freeing up valuable time for bigger priorities."
-                ],
-                "ease-of-use": [
-                    "{feature} makes your experience seamless and stress-free.",
-                    "Enjoy intuitive design with {feature}, making it easier than ever to use.",
-                    "{feature} eliminates the learning curve, so you can get started instantly.",
-                    "Simplify complex tasks effortlessly with {feature}—no expertise required.",
-                    "{feature} is designed with ease in mind, ensuring smooth interactions every time."
-                ],
-                "performance": [
-                    "{feature} delivers top-tier performance, ensuring better results.",
-                    "Achieve peak efficiency with {feature}, designed for high performance.",
-                    "{feature} enhances productivity by working smarter, not harder.",
-                    "Get lightning-fast results with {feature}, optimised for peak speed.",
-                    "{feature} ensures consistent, reliable performance, no matter the challenge."
-                ],
-                "cost-saving": [
-                    "{feature} helps you reduce costs while maintaining high quality.",
-                    "Save money with {feature}, offering cost-effective solutions.",
-                    "Maximise value with {feature}, delivering great benefits at a lower price.",
-                    "{feature} provides premium results without the premium price tag.",
-                    "Cut expenses without compromise—{feature} keeps your budget in check."
-                ],
-                "security": [
-                    "{feature} keeps your data safe and protected at all times.",
-                    "Rest easy knowing {feature} ensures your privacy and security.",
-                    "With {feature}, you gain peace of mind knowing your information is secure.",
-                    "{feature} provides robust protection, guarding against threats and breaches.",
-                    "Trust {feature} to safeguard your assets with industry-leading security measures."
-                ]
-            };
+  <header class="site-header">
+    <a href="index.html" class="brand-lockup">
+      <img src="assets/logo-icon.png" alt="" class="brand-logo">
+      <span class="brand-name">Holistic Email Marketing<em>Free optimisation tools</em></span>
+    </a>
+    <a href="index.html" class="back-link">← All Tools</a>
+  </header>
 
-            let matchedCategory = "";
-            Object.keys(categories).forEach(category => {
-                categories[category].forEach(keyword => {
-                    if (feature.toLowerCase().includes(keyword)) {
-                        matchedCategory = category;
-                    }
-                });
-            });
+  <main>
+    <div class="tool-page">
 
-            const selectedTemplates = matchedCategory ? templates[matchedCategory] : templates["ease-of-use"];
-            const randomIndex = Math.floor(Math.random() * selectedTemplates.length);
-            return selectedTemplates[randomIndex].replace("{feature}", feature);
-        }
+      <header class="tool-header">
+        <span class="hea-pill hea-pill--intermediate">● Intermediate</span>
+        <h1>Feature-to-Benefit Converter</h1>
+        <p class="lead">Transform a product or service feature into a customer benefit statement your reader will actually care about.</p>
+      </header>
 
-        document.getElementById("feature-convert-button").addEventListener("click", function() {
-            const inputFeature = document.getElementById("feature-input").value.trim();
-            const result = convertFeatureToBenefit(inputFeature);
-            document.getElementById("benefit-output").innerHTML = `<p><strong>Benefit:</strong> ${result}</p>`;
+      <div class="tool-card">
+        <div class="field-group">
+          <label class="field-label" for="feature-input">Product or service feature</label>
+          <input type="text" class="hea-input" id="feature-input" placeholder="e.g. automated email scheduling">
+          <p class="error-msg" id="f2b-error">Please enter a feature to convert.</p>
+        </div>
+        <button class="hea-btn hea-btn--primary" id="f2b-btn">Convert →</button>
+
+        <div class="results" id="f2b-results">
+          <hr class="results-divider">
+          <p class="results-label">Customer Benefit</p>
+          <div class="benefit-quote">
+            <p id="benefit-output"></p>
+          </div>
+          <div class="try-again-row">
+            <button class="hea-btn hea-btn--ghost" id="f2b-again">Try another variation →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <img src="assets/logo-icon.png" alt="" class="footer-logo">
+      <span class="footer-wordmark">Holistic Email Marketing</span>
+    </div>
+    <span class="footer-tagline">Smarter email starts here.</span>
+  </footer>
+
+  <script>
+    const categories = {
+      'time-saving': ['automation', 'workflow', 'schedule', 'auto'],
+      'ease-of-use': ['simple', 'easy', 'intuitive', 'user-friendly'],
+      'performance':  ['fast', 'real-time', 'powerful', 'efficient'],
+      'cost-saving':  ['affordable', 'save money', 'budget', 'cost-effective'],
+      'security':     ['secure', 'encryption', 'protected', 'privacy']
+    };
+
+    const templates = {
+      'time-saving': [
+        '{feature} helps you save time and focus on what really matters.',
+        'With {feature}, you can automate tasks and increase efficiency.',
+        'Never waste time again — {feature} streamlines your workflow.',
+        '{feature} eliminates repetitive tasks so you can work smarter, not harder.',
+        'Maximise productivity with {feature}, freeing up valuable time for bigger priorities.'
+      ],
+      'ease-of-use': [
+        '{feature} makes your experience seamless and stress-free.',
+        'Enjoy intuitive design with {feature}, making it easier than ever to use.',
+        '{feature} eliminates the learning curve, so you can get started instantly.',
+        'Simplify complex tasks effortlessly with {feature} — no expertise required.',
+        '{feature} is designed with ease in mind, ensuring smooth interactions every time.'
+      ],
+      'performance': [
+        '{feature} delivers top-tier performance, ensuring better results.',
+        'Achieve peak efficiency with {feature}, designed for high performance.',
+        '{feature} enhances productivity by working smarter, not harder.',
+        'Get lightning-fast results with {feature}, optimised for peak speed.',
+        '{feature} ensures consistent, reliable performance, no matter the challenge.'
+      ],
+      'cost-saving': [
+        '{feature} helps you reduce costs while maintaining high quality.',
+        'Save money with {feature}, offering cost-effective solutions.',
+        'Maximise value with {feature}, delivering great benefits at a lower price.',
+        '{feature} provides premium results without the premium price tag.',
+        'Cut expenses without compromise — {feature} keeps your budget in check.'
+      ],
+      'security': [
+        '{feature} keeps your data safe and protected at all times.',
+        'Rest easy knowing {feature} ensures your privacy and security.',
+        'With {feature}, you gain peace of mind knowing your information is secure.',
+        '{feature} provides robust protection, guarding against threats and breaches.',
+        'Trust {feature} to safeguard your assets with industry-leading security measures.'
+      ]
+    };
+
+    function convert() {
+      const feature = document.getElementById('feature-input').value.trim();
+      const errorEl = document.getElementById('f2b-error');
+      const resultsEl = document.getElementById('f2b-results');
+
+      if (!feature) {
+        errorEl.classList.add('visible');
+        resultsEl.classList.remove('visible');
+        return;
+      }
+      errorEl.classList.remove('visible');
+
+      let matched = '';
+      Object.keys(categories).forEach(cat => {
+        categories[cat].forEach(kw => {
+          if (feature.toLowerCase().includes(kw)) matched = cat;
         });
-    });
+      });
 
-</script>
+      const pool = matched ? templates[matched] : templates['ease-of-use'];
+      const benefit = pool[Math.floor(Math.random() * pool.length)].replace('{feature}', feature);
+
+      document.getElementById('benefit-output').textContent = benefit;
+      resultsEl.classList.add('visible');
+    }
+
+    document.getElementById('f2b-btn').addEventListener('click', convert);
+    document.getElementById('f2b-again').addEventListener('click', convert);
+    document.getElementById('feature-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') convert();
+    });
+  </script>
+
+</body>
+</html>
