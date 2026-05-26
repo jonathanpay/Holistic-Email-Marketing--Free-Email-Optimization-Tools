@@ -7,61 +7,64 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="tool-page.css">
   <style>
+    body { background: var(--hea-bg-alt); }
+
     /* ---- Score display ---- */
     .score-pair {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--hem-s-4);
+      gap: var(--hea-s-4);
     }
     .score-box {
-      background: var(--hem-paper);
-      border-radius: var(--hem-r-md);
-      padding: var(--hem-s-5);
+      background: var(--hea-bg-warm);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-5);
       text-align: center;
     }
     .score-number {
       font-size: clamp(40px, 7vw, 60px);
-      font-weight: var(--hem-w-bold);
-      color: var(--hem-ink);
+      font-weight: var(--hea-w-bold);
+      color: var(--hea-plum);
       line-height: 1;
       font-variant-numeric: tabular-nums;
     }
     .score-name {
-      font-size: var(--hem-text-xs);
-      font-weight: var(--hem-w-bold);
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-bold);
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--hem-fg-3);
-      margin-top: var(--hem-s-2);
+      color: var(--hea-fg-3);
+      margin-top: var(--hea-s-2);
     }
     .score-bar-wrap {
-      margin-top: var(--hem-s-3);
-      height: 4px;
-      background: var(--hem-divider-soft);
-      border-radius: 2px;
+      margin-top: var(--hea-s-3);
+      height: 5px;
+      background: var(--hea-divider);
+      border-radius: 3px;
       overflow: hidden;
     }
     .score-bar {
       height: 100%;
-      border-radius: 2px;
+      border-radius: 3px;
       width: 0;
-      transition: width 0.6s var(--hem-ease);
+      transition: width 0.6s var(--hea-ease);
     }
-    .score-bar--brand    { background: var(--hem-ink); }
-    .score-bar--customer { background: var(--hem-discover); }
+    .score-bar--brand    { background: var(--hea-purple); }
+    .score-bar--customer { background: var(--hea-level-foundation); }
 
     /* ---- Tip ---- */
     .tip-box {
       display: none;
-      margin-top: var(--hem-s-5);
-      background: var(--hem-devise-tint);
-      border-radius: var(--hem-r-md);
-      padding: var(--hem-s-4) var(--hem-s-5);
-      font-size: var(--hem-text-sm);
-      color: var(--hem-devise-deep);
-      gap: var(--hem-s-3);
+      margin-top: var(--hea-s-5);
+      background: #F4E9F9;
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-4) var(--hea-s-5);
+      font-size: var(--hea-text-sm);
+      color: #7A2E96;
+      gap: var(--hea-s-3);
       align-items: flex-start;
-      line-height: var(--hem-lh-normal);
+      line-height: var(--hea-lh-normal);
+      border-left: 3px solid var(--hea-purple);
     }
     .tip-box.visible { display: flex; }
 
@@ -70,12 +73,12 @@
     }
   </style>
 </head>
-<body class="hem">
+<body class="hea">
 
   <header class="site-header">
     <a href="index.html" class="brand-lockup">
-      <span class="hem-mark hem-mark--sm"><i></i></span>
-      <span class="brand-wordmark">Holistic Email Marketing<em>— a practitioner-led consultancy</em></span>
+      <img src="assets/logo-icon.png" alt="" class="brand-logo">
+      <span class="brand-name">Holistic Email Marketing<em>Free optimisation tools</em></span>
     </a>
     <a href="index.html" class="back-link">← All Tools</a>
   </header>
@@ -84,7 +87,7 @@
     <div class="tool-page">
 
       <header class="tool-header">
-        <span class="hem-pill hem-pill--discover">Discover</span>
+        <span class="hea-pill hea-pill--foundation">● Foundation</span>
         <h1>We-We Calculator</h1>
         <p class="lead">Is your copy talking about you, or to your reader? Paste your email below and see the brand vs. customer balance at a glance.</p>
       </header>
@@ -92,10 +95,10 @@
       <div class="tool-card">
         <div class="field-group">
           <label class="field-label" for="wewe-input">Your email copy</label>
-          <textarea class="hem-textarea" id="wewe-input" placeholder="Paste your email copy here…" rows="8"></textarea>
+          <textarea class="hea-textarea" id="wewe-input" placeholder="Paste your email copy here…" rows="8"></textarea>
           <p class="error-msg" id="wewe-error">Please paste some email copy before analysing.</p>
         </div>
-        <button class="hem-btn hem-btn--primary" id="wewe-btn">Analyse →</button>
+        <button class="hea-btn hea-btn--primary" id="wewe-btn">Analyse →</button>
 
         <div class="results" id="wewe-results">
           <hr class="results-divider">
@@ -117,7 +120,7 @@
             </div>
           </div>
           <div class="tip-box" id="wewe-tip">
-            <span style="flex-shrink:0">→</span>
+            <span style="flex-shrink:0;font-weight:600">Tip</span>
             <span>Your copy is heavily brand-focused. Try replacing "we", "us", and "our" with "you" and "your" to put your reader at the centre of the message.</span>
           </div>
         </div>
@@ -128,10 +131,10 @@
 
   <footer class="site-footer">
     <div class="footer-brand">
-      <span class="hem-mark hem-mark--sm"><i></i></span>
+      <img src="assets/logo-icon.png" alt="" class="footer-logo">
       <span class="footer-wordmark">Holistic Email Marketing</span>
     </div>
-    <span class="footer-tagline">Strategy, data, creativity — converging.</span>
+    <span class="footer-tagline">Smarter email starts here.</span>
   </footer>
 
   <script>
@@ -162,7 +165,6 @@
       document.getElementById('customer-pct').textContent = customerPct + '%';
       resultsEl.classList.add('visible');
 
-      // Animate bars after the element becomes visible
       requestAnimationFrame(() => requestAnimationFrame(() => {
         document.getElementById('brand-bar').style.width = brandPct + '%';
         document.getElementById('customer-bar').style.width = customerPct + '%';
