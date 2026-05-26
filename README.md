@@ -1,32 +1,34 @@
-# Holistic Email Marketing: Free Email Optimization Tools
- This repository houses a collection of free email marketing optimization tools developed by Holistic Email Marketing to help marketers craft more effective, engaging, and high-performing email content. These tools are designed to enhance clarity, tone, readability, and personalization, empowering businesses to connect with their audiences more effectively.
+# Holistic Email Marketing: Free Email Optimisation Tools
+
+A collection of free, standalone email marketing tools built by Holistic Email Marketing. No sign-up, no back-end — everything runs in the browser.
 
 ## Available Tools
 
-### 1️⃣ We-We Calculator
-**Check your messaging balance.** This tool analyzes whether your email copy is **brand-centric** (we, our, my) or **customer-centric** (you, your), ensuring a more **reader-focused approach** to boost engagement.
+### 1. We-We Calculator
+**Check your messaging balance.** Counts brand-centric pronouns (we, us, our, I, me, my) vs. customer-centric ones (you, your) and shows the split. Includes a directional tip when copy skews heavily brand-focused.
 
-### 2️⃣ Feature-to-Benefit Converter
-**Make your emails more persuasive.** Transforms **feature-heavy descriptions** into **benefit-driven messaging**, helping you communicate value clearly.
+### 2. Email Readability Score
+**Ensure your emails are easy to read.** Scores copy against three formulas — Flesch-Kincaid Reading Ease, Gunning Fog Index, and SMOG Index — using per-word syllable counting for accuracy. Each formula has its own explainer, and a target-zone card shows what numbers to aim for in email (FK 60+, GF/SMOG grade ≤ 8). Surfaces suggestions for long sentences, complex words, and passive voice.
 
-### 3️⃣ Email Readability Score
-Ensure your emails are easy to read. Uses Flesch-Kincaid, Gunning Fog, and SMOG readability formulas to assess text complexity. Includes:
-- Grade-level insights
-- Real-time feedback on sentence length, complexity, and passive voice usage.
+### 3. Feature-to-Benefit Converter
+**Make your emails more persuasive.** Enter a feature description and select your industry vertical. The tool detects the feature category (time-saving, ease-of-use, performance, cost-saving, security, analytics, personalisation, or support) and returns a customer-benefit statement from a pool of 384 templates across 8 verticals × 8 categories × 6 templates each.
 
-### 4️⃣ Email Tone Analyzer
-Find the right tone for your message.
-- Identifies whether your email is friendly, persuasive, professional, neutral, or negative.
-- Allows you to select a desired tone and provides targeted recommendations to refine your messaging.
+### 4. Statistical Significance Calculator
+**Know when to act on your A/B test results.** Enter sample size, control rate, and variant rate to get a confidence verdict — 99% confident, at least 95% confident, or not yet significant — with a plain-English explanation.
 
-## 🔄 Upcoming Tools (Planned)
-- Emotional Appeal Analyzer – Detects emotional triggers in email copy.  
-- Personalisation & Dynamic Content Checker – Ensures personalization is properly implemented.  
-- Customer Persona Matcher – Matches email content to predefined buyer personas.  
-- Accessibility Checker – Evaluates email HTML for accessibility compliance.  
+### 5. Email Tone Analyzer
+**Find the right tone for your message.** Detects the relative presence of five tones — Friendly, Persuasive, Professional, Urgent, and Empathetic — using keyword pattern matching. Shows a dominant tone badge, a percentage breakdown bar chart, and phrase suggestions for strengthening each tone.
 
-## 🎯 Why Use These Tools?
-- Improve engagement by refining readability and tone.  
-- Enhance clarity with benefit-driven messaging.  
-- Optimize email effectiveness with audience-focused language.  
-- Increase conversions by ensuring the right emotional and persuasive balance.
+## Upcoming Tools (Planned)
+
+- Emotional Appeal Analyzer — detects emotional triggers in email copy
+- Personalisation & Dynamic Content Checker — ensures personalisation tokens are properly implemented
+- Customer Persona Matcher — matches email content to predefined buyer personas
+- Accessibility Checker — evaluates email HTML for accessibility compliance
+
+## Why Use These Tools?
+
+- Improve engagement by refining readability and tone
+- Enhance clarity with benefit-driven messaging
+- Optimise email effectiveness with audience-focused language
+- Make confident A/B testing decisions backed by statistical significance

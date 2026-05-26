@@ -68,6 +68,22 @@
     }
     .tip-box.visible { display: flex; }
 
+    /* ---- How it works note ---- */
+    .tool-note {
+      background: var(--hea-bg);
+      border: 1px solid var(--hea-divider);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-4) var(--hea-s-5);
+      margin-bottom: var(--hea-s-6);
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-2);
+      line-height: var(--hea-lh-normal);
+    }
+    .tool-note strong {
+      color: var(--hea-fg-1);
+      font-weight: var(--hea-w-semibold);
+    }
+
     @media (max-width: 480px) {
       .score-pair { grid-template-columns: 1fr; }
     }
@@ -91,6 +107,14 @@
         <h1>We-We Calculator</h1>
         <p class="lead">Is your copy talking about you, or to your reader? Paste your email below and see the brand vs. customer balance at a glance.</p>
       </header>
+
+      <p class="tool-note">
+        <strong>How it works:</strong> The calculator counts brand-centric pronouns
+        (we, us, our, I, me, my) and customer-centric pronouns (you, your), then shows
+        you the split. Note that first-person <em>I</em> is included in the brand count —
+        so naturally conversational copy will score more brand-focused than it really is.
+        Treat the result as a directional guide, not a precise measure.
+      </p>
 
       <div class="tool-card">
         <div class="field-group">
