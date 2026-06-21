@@ -19,11 +19,18 @@ A collection of free, standalone email marketing tools built by Holistic Email M
 ### 5. Email Tone Analyzer
 **Find the right tone for your message.** Detects the relative presence of five tones — Friendly, Persuasive, Professional, Urgent, and Empathetic — using keyword pattern matching. Shows a dominant tone badge, a percentage breakdown bar chart, and phrase suggestions for strengthening each tone.
 
+### 6. Buyer Persona Matcher
+**Find out who your email is really speaking to.** Analyses copy against the four buyer modalities — Competitive, Spontaneous, Humanistic, and Methodical — using keyword pattern matching. Shows a dominant persona badge, a percentage breakdown, and phrase suggestions for each type. Links to the Intermediate Buyer Modalities & GenAI course.
+
+### 7. Emotional Appeal Analyzer
+**Understand the psychology behind your email copy.** Detects six emotional triggers — Fear, Hope, Curiosity, Pride, Trust, and Belonging — using keyword pattern matching. Shows a dominant appeal badge, percentage breakdown, and guidance on when each appeal works best and when to watch out for overuse. Links to the Foundation Psychology for Email course waitlist.
+
+### 8. A/B Test Duration Calculator
+**Know how long to run your test before you start.** Takes baseline metric (%), minimum relative improvement to detect, and daily sends per variant. Uses a two-proportion z-test (95% confidence, 80% power) to calculate required sample size and days. Includes a sensitivity table showing the smallest detectable improvement at 7, 14, 30, and 60 days, plus warnings for impractical durations and edge-case inputs. Links to the Foundation Email A/B Testing course waitlist.
+
 ## Upcoming Tools (Planned)
 
-- Emotional Appeal Analyzer — detects emotional triggers in email copy
 - Personalisation & Dynamic Content Checker — ensures personalisation tokens are properly implemented
-- Customer Persona Matcher — matches email content to predefined buyer personas
 - Accessibility Checker — evaluates email HTML for accessibility compliance
 
 ## Why Use These Tools?

@@ -77,6 +77,20 @@
       display: flex;
       justify-content: flex-end;
     }
+
+    /* ---- Buyer type note ---- */
+    .buyer-type-note {
+      font-size: var(--hea-text-xs);
+      color: var(--hea-fg-3);
+      margin: var(--hea-s-3) 0 0;
+      line-height: var(--hea-lh-normal);
+    }
+    .buyer-type-note a {
+      color: var(--hea-purple);
+      font-weight: var(--hea-w-semibold);
+      text-decoration: none;
+    }
+    .buyer-type-note a:hover { color: var(--hea-purple-deep); }
   </style>
 </head>
 <body class="hea">
@@ -131,6 +145,7 @@
           <div class="benefit-quote">
             <p id="benefit-output"></p>
           </div>
+          <p class="buyer-type-note" id="buyer-type-note" style="display:none"></p>
           <div class="try-again-row">
             <button class="hea-btn hea-btn--ghost" id="f2b-again">Try another variation →</button>
           </div>
@@ -702,6 +717,18 @@
 
     }; /* end templates */
 
+    /* ---- Buyer type mapping ---- */
+    const buyerTypeMap = {
+      'time-saving':     'Competitive',
+      'performance':     'Competitive',
+      'ease-of-use':     'Spontaneous',
+      'cost-saving':     'Methodical',
+      'security':        'Methodical',
+      'analytics':       'Methodical',
+      'personalisation': 'Humanistic',
+      'support':         'Humanistic'
+    };
+
     /* ---- Convert logic ---- */
     function detectCategory(feature) {
       const text = feature.toLowerCase();
@@ -732,6 +759,12 @@
       const benefit  = pool[Math.floor(Math.random() * pool.length)].replace(/\{feature\}/g, feature);
 
       document.getElementById('benefit-output').textContent = benefit;
+
+      const buyerType = buyerTypeMap[category] || 'General';
+      const noteEl = document.getElementById('buyer-type-note');
+      noteEl.innerHTML = `This benefit is most likely to resonate with <strong>${buyerType}</strong> buyer types. <a href="persona-tool.html">Check your full email in the Buyer Persona Matcher →</a>`;
+      noteEl.style.display = '';
+
       resultsEl.classList.add('visible');
     }
 

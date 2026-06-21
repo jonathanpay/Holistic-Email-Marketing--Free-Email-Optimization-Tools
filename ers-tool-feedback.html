@@ -93,6 +93,39 @@
       flex-shrink: 0;
     }
 
+    /* ---- Context note in target zone ---- */
+    .score-context {
+      font-size: var(--hea-text-xs);
+      color: rgba(255,255,255,0.72);
+      line-height: var(--hea-lh-normal);
+      margin: var(--hea-s-2) 0 0;
+      font-style: italic;
+    }
+
+    /* ---- Consulting CTA ---- */
+    .consulting-cta {
+      margin-top: var(--hea-s-6);
+      background: var(--hea-bg-warm);
+      border: 1px solid rgba(58,21,74,0.15);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-5) var(--hea-s-6);
+    }
+    .consulting-cta-kicker {
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hea-plum);
+      margin: 0 0 var(--hea-s-2);
+    }
+    .consulting-cta p {
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-2);
+      line-height: var(--hea-lh-normal);
+      margin: 0 0 var(--hea-s-4);
+    }
+    .consulting-cta a { display: inline-block; }
+
     @media (max-width: 480px) {
       .scores-grid { grid-template-columns: 1fr; }
     }
@@ -151,7 +184,14 @@
             <div class="score-item score-item--target">
               <p class="score-kicker">Email target zone</p>
               <p class="score-label">Aim for a Flesch-Kincaid score of <strong style="color:#fff">60 or above</strong> and a Gunning Fog / SMOG grade of <strong style="color:#fff">8 or below</strong> — roughly a comfortable 8th-grade reading level for most audiences.</p>
+              <p class="score-context">These benchmarks suit broad consumer audiences. For professional, technical, or B2B readers, higher complexity is often appropriate — treat the scores as a starting point, not a rule.</p>
             </div>
+          </div>
+
+          <div class="consulting-cta" id="ers-consulting-cta" style="display:none">
+            <p class="consulting-cta-kicker">Get expert help</p>
+            <p>When scores are consistently in the difficult range across all three formulas, the issue often runs deeper than sentence length — it can signal structural complexity in how your messaging is built. Our email consulting service can review your copy and identify the changes that will have the biggest impact.</p>
+            <a href="https://holisticemail.com/contact/" class="hea-btn hea-btn--ghost" target="_blank" rel="noopener">Talk to us →</a>
           </div>
 
           <div class="suggestions" id="suggestions-wrap" style="display:none">
@@ -268,6 +308,9 @@
       document.getElementById('gf-grade').textContent   = gf.label;
       document.getElementById('smog-score').textContent = smog.score;
       document.getElementById('smog-grade').textContent = smog.label;
+
+      const allDifficult = parseFloat(fk.score) < 50 && parseFloat(gf.score) > 10 && parseFloat(smog.score) > 10;
+      document.getElementById('ers-consulting-cta').style.display = allDifficult ? '' : 'none';
 
       const suggestWrap = document.getElementById('suggestions-wrap');
       const suggestList = document.getElementById('suggestions-list');

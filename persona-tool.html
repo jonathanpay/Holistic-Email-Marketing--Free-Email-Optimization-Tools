@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buyer Persona Matcher — Holistic Email Marketing</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="tool-page.css">
+  <style>
+    body { background: var(--hea-bg-alt); }
+
+    /* ---- Short-copy warning ---- */
+    .short-copy-warn {
+      display: none;
+      background: rgba(232,165,60,0.12);
+      border: 1px solid rgba(232,165,60,0.35);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-3) var(--hea-s-4);
+      font-size: var(--hea-text-sm);
+      color: #7A4E00;
+      margin-bottom: var(--hea-s-5);
+    }
+    .short-copy-warn.visible { display: block; }
+
+    /* ---- Dominant badge ---- */
+    .dominant-wrap {
+      text-align: center;
+      padding: var(--hea-s-5) var(--hea-s-5) var(--hea-s-4);
+    }
+    .dominant-label {
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hea-fg-3);
+      margin: 0 0 var(--hea-s-3);
+    }
+    .dominant-badge {
+      display: inline-block;
+      color: #fff;
+      font-size: var(--hea-text-base);
+      font-weight: var(--hea-w-semibold);
+      padding: var(--hea-s-2) var(--hea-s-5);
+      border-radius: 999px;
+      background: var(--hea-fg-3);
+      transition: background 0.3s var(--hea-ease);
+    }
+    .dominant-note {
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-3);
+      font-style: italic;
+      margin: var(--hea-s-3) 0 0;
+    }
+
+    /* ---- Persona bars ---- */
+    .persona-bars {
+      display: flex;
+      flex-direction: column;
+      gap: var(--hea-s-3);
+      margin-bottom: var(--hea-s-5);
+    }
+    .persona-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 36px;
+      align-items: center;
+      gap: var(--hea-s-3);
+    }
+    .persona-name {
+      font-size: var(--hea-text-sm);
+      font-weight: var(--hea-w-semibold);
+      color: var(--hea-fg-1);
+      transition: color 0.3s var(--hea-ease);
+    }
+    .persona-bar-track {
+      height: 8px;
+      background: var(--hea-divider);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .persona-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      width: 0;
+      opacity: 0.35;
+      transition: width 0.6s var(--hea-ease);
+    }
+    .persona-row.is-dominant .persona-bar-fill { opacity: 1; }
+    .persona-pct {
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-semibold);
+      color: var(--hea-fg-3);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      transition: color 0.3s var(--hea-ease);
+    }
+
+    /* ---- Persona tip cards ---- */
+    .persona-tips {
+      display: flex;
+      flex-direction: column;
+      gap: var(--hea-s-3);
+      margin-top: var(--hea-s-5);
+    }
+    .persona-tip-card {
+      background: var(--hea-bg-warm);
+      border-radius: var(--hea-r-md);
+      border-left: 3px solid transparent;
+      padding: var(--hea-s-4) var(--hea-s-5);
+    }
+    .persona-tip-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--hea-s-3);
+    }
+    .persona-tip-name {
+      font-size: var(--hea-text-sm);
+      font-weight: var(--hea-w-bold);
+      flex-shrink: 0;
+      margin-right: var(--hea-s-3);
+    }
+    .persona-tip-tag {
+      font-size: var(--hea-text-xs);
+      color: var(--hea-fg-3);
+      font-style: italic;
+      text-align: right;
+    }
+    .persona-tip-desc {
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-2);
+      line-height: var(--hea-lh-normal);
+      margin: 0 0 var(--hea-s-3);
+    }
+    .persona-tip-phrases {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--hea-s-2);
+    }
+    .phrase-chip {
+      font-size: var(--hea-text-xs);
+      border-radius: 999px;
+      padding: 2px var(--hea-s-3);
+      font-weight: var(--hea-w-semibold);
+    }
+
+    /* ---- Course CTA ---- */
+    .course-cta {
+      margin-top: var(--hea-s-6);
+      background: var(--hea-purple-tint);
+      border: 1px solid rgba(158,65,191,0.2);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-5) var(--hea-s-6);
+    }
+    .course-cta-kicker {
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hea-purple);
+      margin: 0 0 var(--hea-s-2);
+    }
+    .course-cta p {
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-2);
+      line-height: var(--hea-lh-normal);
+      margin: 0 0 var(--hea-s-4);
+    }
+    .course-cta a.hea-btn { display: inline-block; }
+  </style>
+</head>
+<body class="hea">
+
+  <header class="site-header">
+    <a href="index.html" class="brand-lockup">
+      <img src="assets/logo-icon.png" alt="" class="brand-logo">
+      <span class="brand-name">Holistic Email Marketing<em>Free optimisation tools</em></span>
+    </a>
+    <a href="index.html" class="back-link">← All Tools</a>
+  </header>
+
+  <main>
+    <div class="tool-page">
+
+      <header class="tool-header">
+        <span class="hea-pill hea-pill--intermediate">● Intermediate</span>
+        <h1>Buyer Persona Matcher</h1>
+        <p class="lead">Paste your email copy to see which buyer types it speaks to — Competitive, Spontaneous, Humanistic, or Methodical — and get phrase suggestions for the types you're currently missing.</p>
+      </header>
+
+      <div class="tool-card">
+        <div class="field-group">
+          <label class="field-label" for="persona-input">Your email copy</label>
+          <textarea class="hea-textarea" id="persona-input" placeholder="Paste your email copy here…" rows="8"></textarea>
+          <p class="error-msg" id="persona-error">Please paste some email copy before analysing.</p>
+        </div>
+        <button class="hea-btn hea-btn--primary" id="persona-btn">Match Personas →</button>
+
+        <div class="results" id="persona-results">
+          <hr class="results-divider">
+
+          <p class="short-copy-warn" id="short-warn">For a reliable result, paste at least a full paragraph. Short samples may skew the scores.</p>
+
+          <div class="dominant-wrap">
+            <p class="dominant-label">Strongest match</p>
+            <span class="dominant-badge" id="dominant-badge">—</span>
+            <p class="dominant-note" id="dominant-note"></p>
+          </div>
+
+          <p class="results-label" style="margin-top:var(--hea-s-2)">Persona breakdown</p>
+          <div class="persona-bars" id="persona-bars"></div>
+
+          <hr class="results-divider">
+          <p class="results-label">How to write for each type</p>
+          <div class="persona-tips" id="persona-tips"></div>
+
+          <div class="course-cta">
+            <p class="course-cta-kicker">Take it further</p>
+            <p>The <strong>Intermediate Buyer Modalities &amp; GenAI</strong> course teaches you to craft emails that convert across all four buyer types — including the ones your copy is currently missing.</p>
+            <a href="https://holisticemailacademy.com/courses/intermediate-buyer-modalities-genai/" class="hea-btn hea-btn--primary" target="_blank" rel="noopener">Explore the course →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <img src="assets/logo-icon.png" alt="" class="footer-logo">
+      <span class="footer-wordmark">Holistic Email Marketing</span>
+    </div>
+    <span class="footer-tagline">Smarter email starts here.</span>
+  </footer>
+
+  <script>
+    const personas = [
+      {
+        id:      'competitive',
+        name:    'Competitive',
+        color:   '#C93D1B',
+        tint:    'rgba(201,61,27,0.1)',
+        desc:    'Direct, results-focused, and achievement-driven. Responds to performance language, specific outcomes, and speed.',
+        note:    'Effective for ROI-focused B2B emails, productivity tools, and high-performance audiences.',
+        phrases: ['"Get results in X days"', '"Outperform your competition"', '"The fastest route to [outcome]"', '"Here\'s your ROI"', '"Win more with less"'],
+        keywords: ['results', 'proven', 'win', 'achieve', 'goal', 'roi', 'performance', 'fast', 'instantly', 'quickly', 'ahead', 'advantage', 'outperform', 'growth', 'bottom line', 'number one', 'gain', 'dominate', 'power', 'beat', 'success', 'top', 'efficient', 'productivity', 'faster', 'leading', 'rank', 'competitive', 'maximise', 'maximize', 'drive', 'impact', 'output', 'accelerate', 'scale']
+      },
+      {
+        id:      'spontaneous',
+        name:    'Spontaneous',
+        color:   '#A86200',
+        tint:    'rgba(168,98,0,0.1)',
+        desc:    'Emotion-first and impulse-driven. Responds to excitement, novelty, exclusivity, and social momentum.',
+        note:    'Works well for flash sales, new product launches, limited offers, and community-driven brands.',
+        phrases: ['"You\'ll love this"', '"Just launched"', '"Don\'t miss out"', '"Everyone\'s talking about"', '"Limited spots available"'],
+        keywords: ['exciting', 'new', 'discover', 'amazing', 'incredible', 'love', 'trending', 'everyone', 'exclusive', 'limited', 'last chance', 'today only', 'hurry', 'surprise', 'delight', 'popular', 'fantastic', 'brilliant', 'awesome', 'special', 'deal', 'offer', 'sale', 'fun', 'enjoy', 'launch', "don't miss", 'just dropped', 'introducing', 'fresh', 'buzz', 'sensation']
+      },
+      {
+        id:      'humanistic',
+        name:    'Humanistic',
+        color:   '#167A5E',
+        tint:    'rgba(22,122,94,0.1)',
+        desc:    'Relationship-driven and empathy-led. Responds to warmth, shared values, community, and personal stories.',
+        note:    'Powerful for welcome sequences, nurture flows, non-profit emails, and values-led brands.',
+        phrases: ['"We understand how you feel"', '"Join [X] people like you"', '"Here\'s [name]\'s story"', '"We\'re here whenever you need us"', '"You\'re not alone in this"'],
+        keywords: ['together', 'community', 'relationship', 'story', 'feel', 'care', 'support', 'understand', 'trust', 'share', 'connect', 'belong', 'journey', "you're not alone", "we're here", 'personal', 'people', 'family', 'team', 'warmth', 'values', 'mission', 'meaningful', 'purpose', 'heart', 'compassion', 'kindness', 'culture', 'listen', 'empathy', 'human', 'real', 'authentic']
+      },
+      {
+        id:      'methodical',
+        name:    'Methodical',
+        color:   '#1A5FA8',
+        tint:    'rgba(26,95,168,0.1)',
+        desc:    'Detail-oriented and logic-led. Responds to data, process clarity, proof, and risk reduction.',
+        note:    'Essential for B2B, technical, financial, and enterprise audiences who need to justify decisions.',
+        phrases: ['"Research shows that..."', '"Here\'s exactly how it works"', '"Step 1… Step 2… Step 3…"', '"Backed by [X] studies"', '"Compare the data"'],
+        keywords: ['research', 'data', 'study', 'evidence', 'statistics', 'step by step', 'process', 'how it works', 'because', 'analysis', 'compare', 'guarantee', 'risk-free', 'backed by', 'in fact', 'specifically', 'methodology', 'framework', 'system', 'detailed', 'comprehensive', 'thorough', 'accurate', 'reliable', 'consistent', 'checklist', 'guide', 'roadmap', 'benchmark', 'measure', 'criteria', 'fact', 'statistic', 'percent', 'breakdown', 'specification', 'structured']
+      }
+    ];
+
+    function scoreText(text) {
+      const lower = text.toLowerCase();
+      return personas.map(p => {
+        const count = p.keywords.reduce((n, kw) => {
+          let pos = 0, hits = 0;
+          while ((pos = lower.indexOf(kw, pos)) !== -1) { hits++; pos += kw.length; }
+          return n + hits;
+        }, 0);
+        return { ...p, count };
+      });
+    }
+
+    function analyse() {
+      const text    = document.getElementById('persona-input').value.trim();
+      const errorEl = document.getElementById('persona-error');
+      const results = document.getElementById('persona-results');
+      const warnEl  = document.getElementById('short-warn');
+
+      if (!text) {
+        errorEl.classList.add('visible');
+        results.classList.remove('visible');
+        return;
+      }
+      errorEl.classList.remove('visible');
+
+      const wordCount = text.split(/\s+/).filter(Boolean).length;
+      warnEl.classList.toggle('visible', wordCount < 30);
+
+      const scored = scoreText(text);
+      const total  = scored.reduce((n, p) => n + p.count, 0);
+      const sorted = [...scored].sort((a, b) => b.count - a.count);
+      const top    = sorted[0];
+      const second = sorted[1];
+
+      // Dominant badge
+      const badgeEl = document.getElementById('dominant-badge');
+      const noteEl  = document.getElementById('dominant-note');
+
+      if (total === 0) {
+        badgeEl.textContent    = 'Mixed / Neutral';
+        badgeEl.style.background = '#897680';
+        noteEl.textContent     = 'No clear persona signals detected. Adding intentional language cues will help your copy speak to specific buyer types.';
+      } else if (top.count > 0 && second.count > 0 && (top.count - second.count) / total < 0.08) {
+        badgeEl.textContent    = `${top.name} & ${second.name}`;
+        badgeEl.style.background = top.color;
+        noteEl.textContent     = 'Your copy speaks to two types at similar strength. Check the breakdown to see which types you\'re underserving.';
+      } else if (top.count / total < 0.3) {
+        badgeEl.textContent    = 'Mixed / Neutral';
+        badgeEl.style.background = '#897680';
+        noteEl.textContent     = 'No single buyer type stands out. Targeted emails typically convert better when they speak to a specific persona.';
+      } else {
+        badgeEl.textContent    = top.name;
+        badgeEl.style.background = top.color;
+        noteEl.textContent     = top.note;
+      }
+
+      // Persona bars (in original order for consistency)
+      const barsEl = document.getElementById('persona-bars');
+      barsEl.innerHTML = scored.map(p => {
+        const pct   = total > 0 ? Math.round(p.count / total * 100) : 0;
+        const isDom = p.id === top.id && total > 0;
+        return `<div class="persona-row${isDom ? ' is-dominant' : ''}">
+          <span class="persona-name" style="${isDom ? `color:${p.color}` : ''}">${p.name}</span>
+          <div class="persona-bar-track">
+            <div class="persona-bar-fill" data-pct="${pct}" style="background:${p.color}"></div>
+          </div>
+          <span class="persona-pct" style="${isDom ? `color:${p.color}` : ''}">${pct}%</span>
+        </div>`;
+      }).join('');
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        barsEl.querySelectorAll('.persona-bar-fill').forEach(el => {
+          el.style.width = el.dataset.pct + '%';
+        });
+      }));
+
+      // Tip cards — dominant first
+      const tipsEl = document.getElementById('persona-tips');
+      tipsEl.innerHTML = sorted.map(p => `
+        <div class="persona-tip-card" style="border-left-color:${p.color}">
+          <div class="persona-tip-head">
+            <span class="persona-tip-name" style="color:${p.color}">${p.name}</span>
+            <span class="persona-tip-tag">${p.desc}</span>
+          </div>
+          <p class="persona-tip-desc">${p.note}</p>
+          <div class="persona-tip-phrases">
+            ${p.phrases.map(ph => `<span class="phrase-chip" style="background:${p.tint};color:${p.color}">${ph}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      results.classList.add('visible');
+    }
+
+    document.getElementById('persona-btn').addEventListener('click', analyse);
+    document.getElementById('persona-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && e.ctrlKey) analyse();
+    });
+  </script>
+
+</body>
+</html>
