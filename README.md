@@ -22,9 +22,11 @@ A collection of free, standalone email marketing tools built by Holistic Email M
 ### 6. Buyer Persona Matcher
 **Find out who your email is really speaking to.** Analyses copy against the four buyer modalities — Competitive, Spontaneous, Humanistic, and Methodical — using keyword pattern matching. Shows a dominant persona badge, a percentage breakdown, and phrase suggestions for each type. Links to the Intermediate Buyer Modalities & GenAI course.
 
+### 7. Emotional Appeal Analyzer
+**Understand the psychology behind your email copy.** Detects six emotional triggers — Fear, Hope, Curiosity, Pride, Trust, and Belonging — using keyword pattern matching. Shows a dominant appeal badge, percentage breakdown, and guidance on when each appeal works best and when to watch out for overuse. Links to the Foundation Psychology for Email course waitlist.
+
 ## Upcoming Tools (Planned)
 
-- Emotional Appeal Analyzer — detects emotional triggers in email copy
 - Personalisation & Dynamic Content Checker — ensures personalisation tokens are properly implemented
 - Accessibility Checker — evaluates email HTML for accessibility compliance
 
