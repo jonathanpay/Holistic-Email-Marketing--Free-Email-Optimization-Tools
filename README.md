@@ -19,11 +19,13 @@ A collection of free, standalone email marketing tools built by Holistic Email M
 ### 5. Email Tone Analyzer
 **Find the right tone for your message.** Detects the relative presence of five tones — Friendly, Persuasive, Professional, Urgent, and Empathetic — using keyword pattern matching. Shows a dominant tone badge, a percentage breakdown bar chart, and phrase suggestions for strengthening each tone.
 
+### 6. Buyer Persona Matcher
+**Find out who your email is really speaking to.** Analyses copy against the four buyer modalities — Competitive, Spontaneous, Humanistic, and Methodical — using keyword pattern matching. Shows a dominant persona badge, a percentage breakdown, and phrase suggestions for each type. Links to the Intermediate Buyer Modalities & GenAI course.
+
 ## Upcoming Tools (Planned)
 
 - Emotional Appeal Analyzer — detects emotional triggers in email copy
 - Personalisation & Dynamic Content Checker — ensures personalisation tokens are properly implemented
-- Customer Persona Matcher — matches email content to predefined buyer personas
 - Accessibility Checker — evaluates email HTML for accessibility compliance
 
 ## Why Use These Tools?
