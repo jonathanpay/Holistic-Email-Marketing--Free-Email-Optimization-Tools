@@ -16,10 +16,39 @@
       gap: var(--hea-s-4);
     }
 
+    /* ---- Field hints ---- */
+    .field-hint {
+      font-size: var(--hea-text-xs);
+      color: var(--hea-fg-3);
+      line-height: var(--hea-lh-normal);
+      margin: var(--hea-s-2) 0 0;
+    }
+
+    /* ---- Planning prompt ---- */
+    .planning-prompt {
+      display: flex;
+      align-items: center;
+      gap: var(--hea-s-2);
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-3);
+      padding: var(--hea-s-4) var(--hea-s-5);
+      background: var(--hea-bg-alt);
+      border: 1px solid var(--hea-divider);
+      border-radius: var(--hea-r-md);
+      margin-bottom: var(--hea-s-5);
+    }
+    .planning-prompt a {
+      color: var(--hea-purple);
+      font-weight: var(--hea-w-semibold);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .planning-prompt a:hover { color: var(--hea-purple-deep); }
+
     /* ---- Confidence result ---- */
     .confidence-result {
       text-align: center;
-      padding: var(--hea-s-7) var(--hea-s-5);
+      padding: var(--hea-s-7) var(--hea-s-5) var(--hea-s-5);
     }
     .confidence-badge {
       display: inline-flex;
@@ -31,7 +60,7 @@
       margin: 0 auto var(--hea-s-5);
     }
     .confidence-badge svg { width: 30px; height: 30px; }
-    .confidence-badge.is-significant  {
+    .confidence-badge.is-significant {
       background: rgba(33,191,61,0.15);
       box-shadow: 0 0 0 8px rgba(33,191,61,0.08);
     }
@@ -55,6 +84,70 @@
       font-style: italic;
     }
 
+    /* ---- Validation note ---- */
+    .validation-note {
+      background: var(--hea-bg-warm);
+      border-left: 3px solid var(--hea-purple-soft);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-4) var(--hea-s-5);
+      margin: var(--hea-s-5) 0 0;
+      text-align: left;
+    }
+    .validation-note-head {
+      font-size: var(--hea-text-sm);
+      font-weight: var(--hea-w-bold);
+      color: var(--hea-plum);
+      margin: 0 0 var(--hea-s-2);
+    }
+    .validation-note p {
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-2);
+      line-height: var(--hea-lh-normal);
+      margin: 0;
+    }
+
+    /* ---- Cross-link ---- */
+    .tool-crosslink {
+      display: flex;
+      align-items: center;
+      gap: var(--hea-s-2);
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-3);
+      padding: var(--hea-s-4) 0;
+      border-top: 1px solid var(--hea-divider);
+      margin-top: var(--hea-s-5);
+    }
+    .tool-crosslink a {
+      color: var(--hea-purple);
+      font-weight: var(--hea-w-semibold);
+      text-decoration: none;
+    }
+    .tool-crosslink a:hover { color: var(--hea-purple-deep); }
+
+    /* ---- Course CTA ---- */
+    .course-cta {
+      margin-top: var(--hea-s-6);
+      background: var(--hea-purple-tint);
+      border: 1px solid rgba(158,65,191,0.2);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-5) var(--hea-s-6);
+    }
+    .course-cta-kicker {
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hea-purple);
+      margin: 0 0 var(--hea-s-2);
+    }
+    .course-cta p {
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-2);
+      line-height: var(--hea-lh-normal);
+      margin: 0 0 var(--hea-s-4);
+    }
+    .course-cta a.hea-btn { display: inline-block; }
+
     @media (max-width: 480px) {
       .field-row { grid-template-columns: 1fr; }
     }
@@ -76,29 +169,38 @@
       <header class="tool-header">
         <span class="hea-pill hea-pill--intermediate">● Intermediate</span>
         <h1>Statistical Significance Calculator</h1>
-        <p class="lead">Find out whether your A/B test result is statistically significant before you act on it. Enter your sample size and conversion rates below.</p>
+        <p class="lead">In Holistic Testing, statistical significance is a checkpoint — not a conclusion. Use this calculator to find out whether your result is reliable enough to act on, then decide how to validate it before rolling out.</p>
       </header>
 
       <div class="tool-card">
+
+        <div class="planning-prompt">
+          <span>Planning a new test?</span>
+          <a href="ab-duration-tool.html">A/B Test Duration Calculator →</a>
+        </div>
+
         <div class="field-group">
           <label class="field-label" for="sampleSize">
-            Sample Size
+            Sample size
             <span style="font-weight:400;color:var(--hea-fg-3)"> — per variant</span>
           </label>
           <input type="number" class="hea-input" id="sampleSize" placeholder="e.g. 1000" min="1">
         </div>
+
         <div class="field-row">
           <div class="field-group">
-            <label class="field-label" for="controlRate">Control Rate (%)</label>
+            <label class="field-label" for="controlRate">Control rate (%)</label>
             <input type="number" class="hea-input" id="controlRate" placeholder="e.g. 2.5" step="0.01">
           </div>
           <div class="field-group">
-            <label class="field-label" for="variantRate">Variant Rate (%)</label>
+            <label class="field-label" for="variantRate">Variant rate (%)</label>
             <input type="number" class="hea-input" id="variantRate" placeholder="e.g. 3.1" step="0.01">
           </div>
         </div>
+        <p class="field-hint">Enter the metric that maps to your test objective — the same one you defined before the test began. Switching to a more favourable metric after seeing results invalidates the experiment.</p>
+
         <p class="error-msg" id="sscc-error">Please enter valid values in all three fields.</p>
-        <button class="hea-btn hea-btn--primary" id="sscc-btn" style="margin-top:var(--hea-s-2)">Calculate →</button>
+        <button class="hea-btn hea-btn--primary" id="sscc-btn" style="margin-top:var(--hea-s-5)">Calculate →</button>
 
         <div class="results" id="sscc-results">
           <hr class="results-divider">
@@ -112,7 +214,23 @@
               </svg>
             </div>
             <p class="confidence-verdict" id="sscc-verdict"></p>
-            <p class="confidence-note" id="sscc-note"></p>
+            <p class="confidence-note"   id="sscc-note"></p>
+
+            <div class="validation-note" id="sscc-validation" style="display:none">
+              <p class="validation-note-head" id="sscc-validation-head"></p>
+              <p id="sscc-validation-body"></p>
+            </div>
+          </div>
+
+          <div class="tool-crosslink" id="sscc-crosslink" style="display:none">
+            <span id="sscc-crosslink-label"></span>
+            <a href="ab-duration-tool.html">A/B Test Duration Calculator →</a>
+          </div>
+
+          <div class="course-cta" id="sscc-course-cta" style="display:none">
+            <p class="course-cta-kicker">Go deeper</p>
+            <p>The <strong>Intermediate Holistic Testing</strong> course covers the full methodology — from hypothesis writing and metric selection, to validation strategy and turning results into long-term programme insight.</p>
+            <a href="https://holisticemailacademy.com/courses/intermediate-holistic-testing-for-deeper-insights/" class="hea-btn hea-btn--primary" target="_blank" rel="noopener">Join the waitlist →</a>
           </div>
         </div>
       </div>
@@ -133,9 +251,8 @@
       const sampleSize  = parseFloat(document.getElementById('sampleSize').value);
       const controlRate = parseFloat(document.getElementById('controlRate').value) / 100;
       const variantRate = parseFloat(document.getElementById('variantRate').value) / 100;
-
-      const errorEl   = document.getElementById('sscc-error');
-      const resultsEl = document.getElementById('sscc-results');
+      const errorEl     = document.getElementById('sscc-error');
+      const resultsEl   = document.getElementById('sscc-results');
 
       if (isNaN(sampleSize) || isNaN(controlRate) || isNaN(variantRate) || sampleSize <= 0) {
         errorEl.classList.add('visible');
@@ -144,16 +261,22 @@
       }
       errorEl.classList.remove('visible');
 
-      const pooledRate    = ((controlRate * sampleSize) + (variantRate * sampleSize)) / (2 * sampleSize);
+      const pooledRate    = (controlRate + variantRate) / 2;
       const standardError = Math.sqrt((2 * pooledRate * (1 - pooledRate)) / sampleSize);
-      const zScore        = (variantRate - controlRate) / standardError;
+      const zScore        = Math.abs(variantRate - controlRate) / standardError;
       const confidence    = (1 - (1 / Math.exp(zScore * zScore / 2))) * 100;
 
-      const badge   = document.getElementById('sscc-badge');
-      const verdict = document.getElementById('sscc-verdict');
-      const note    = document.getElementById('sscc-note');
-      const check   = document.getElementById('badge-check');
-      const cross   = document.getElementById('badge-cross');
+      const badge          = document.getElementById('sscc-badge');
+      const verdict        = document.getElementById('sscc-verdict');
+      const note           = document.getElementById('sscc-note');
+      const check          = document.getElementById('badge-check');
+      const cross          = document.getElementById('badge-cross');
+      const validationEl   = document.getElementById('sscc-validation');
+      const valHead        = document.getElementById('sscc-validation-head');
+      const valBody        = document.getElementById('sscc-validation-body');
+      const crosslinkEl    = document.getElementById('sscc-crosslink');
+      const crosslinkLabel = document.getElementById('sscc-crosslink-label');
+      const ctaEl          = document.getElementById('sscc-course-cta');
 
       badge.className   = 'confidence-badge';
       verdict.className = 'confidence-verdict';
@@ -161,23 +284,39 @@
       if (confidence >= 99) {
         badge.classList.add('is-significant');
         verdict.classList.add('is-significant');
-        verdict.textContent = '99% Confident';
-        note.textContent    = 'Your result is highly significant. You can act on this with confidence.';
-        check.style.display = ''; cross.style.display = 'none';
+        verdict.textContent      = '99% Confident';
+        note.textContent         = 'Your result is highly significant. You can act on this with confidence.';
+        check.style.display      = ''; cross.style.display = 'none';
+        valHead.textContent      = 'Before you roll out — validate';
+        valBody.textContent      = 'A highly significant result is a strong signal. In Holistic Testing, the next step is validation: repeat the finding in a different segment or on a separate send occasion. One result, however strong, can still be a coincidence. Confirmation is what turns a signal into a reliable insight.';
+        validationEl.style.display  = '';
+        crosslinkLabel.textContent  = 'Planning your next test?';
+        crosslinkEl.style.display   = '';
       } else if (confidence >= 95) {
         badge.classList.add('is-significant');
         verdict.classList.add('is-significant');
-        verdict.textContent = 'At Least 95% Confident';
-        note.textContent    = 'Your result meets the standard threshold for statistical significance.';
-        check.style.display = ''; cross.style.display = 'none';
+        verdict.textContent      = 'At Least 95% Confident';
+        note.textContent         = 'Your result meets the standard threshold for statistical significance.';
+        check.style.display      = ''; cross.style.display = 'none';
+        valHead.textContent      = 'Significant — but validate before rolling out';
+        valBody.textContent      = 'This result clears the standard threshold, but in Holistic Testing that\'s a reason to validate, not to immediately declare a winner. Repeat the test in a different context — a different segment, list, or send occasion — to confirm the pattern holds before committing to a change.';
+        validationEl.style.display  = '';
+        crosslinkLabel.textContent  = 'Planning your validation test?';
+        crosslinkEl.style.display   = '';
       } else {
         badge.classList.add('not-significant');
         verdict.classList.add('not-significant');
-        verdict.textContent = 'Not Yet Significant';
-        note.textContent    = 'You need more data before acting on this result. Continue the test.';
-        check.style.display = 'none'; cross.style.display = '';
+        verdict.textContent      = 'Not Yet Significant';
+        note.textContent         = 'You need more data before acting on this result.';
+        cross.style.display      = ''; check.style.display = 'none';
+        valHead.textContent      = 'Two things to check';
+        valBody.textContent      = 'First, confirm your test has run for the duration you planned — checking early is a common source of false negatives. Second, if you\'ve hit your planned duration and still have no result, your effect size may be smaller than your test was designed to detect. Use the Duration Calculator to check whether a longer run or a wider minimum effect would change things.';
+        validationEl.style.display  = '';
+        crosslinkLabel.textContent  = 'Check if your test was sized correctly →';
+        crosslinkEl.style.display   = '';
       }
 
+      ctaEl.style.display = '';
       resultsEl.classList.add('visible');
     }
 
