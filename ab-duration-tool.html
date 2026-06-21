@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A/B Test Duration Calculator — Holistic Email Marketing</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="tool-page.css">
+  <style>
+    body { background: var(--hea-bg-alt); }
+
+    /* ---- Two-column field row ---- */
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--hea-s-4);
+    }
+
+    /* ---- Primary result ---- */
+    .duration-result {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--hea-s-4);
+      padding: var(--hea-s-5) 0;
+    }
+    .duration-stat {
+      background: var(--hea-bg-alt);
+      border: 1px solid var(--hea-divider);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-5);
+      text-align: center;
+    }
+    .duration-stat-value {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: var(--hea-w-bold);
+      color: var(--hea-purple);
+      line-height: 1.1;
+      margin: 0 0 var(--hea-s-2);
+    }
+    .duration-stat-label {
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-bold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--hea-fg-3);
+      margin: 0;
+    }
+
+    /* ---- Warnings ---- */
+    .calc-warning {
+      display: none;
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-3) var(--hea-s-4);
+      font-size: var(--hea-text-sm);
+      line-height: var(--hea-lh-normal);
+      margin-bottom: var(--hea-s-4);
+    }
+    .calc-warning.visible { display: block; }
+    .calc-warning--amber {
+      background: rgba(232,165,60,0.12);
+      border: 1px solid rgba(232,165,60,0.35);
+      color: #7A4E00;
+    }
+    .calc-warning--red {
+      background: rgba(197,58,75,0.10);
+      border: 1px solid rgba(197,58,75,0.25);
+      color: #922030;
+    }
+
+    /* ---- Sensitivity table ---- */
+    .sensitivity-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--hea-text-sm);
+      margin-top: var(--hea-s-2);
+    }
+    .sensitivity-table th {
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-bold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--hea-fg-3);
+      text-align: left;
+      padding: var(--hea-s-2) var(--hea-s-3) var(--hea-s-3);
+      border-bottom: 1px solid var(--hea-divider);
+    }
+    .sensitivity-table th:last-child { text-align: right; }
+    .sensitivity-table td {
+      padding: var(--hea-s-3);
+      border-bottom: 1px solid var(--hea-divider);
+      color: var(--hea-fg-2);
+    }
+    .sensitivity-table td:last-child {
+      text-align: right;
+      font-weight: var(--hea-w-semibold);
+      color: var(--hea-fg-1);
+      font-variant-numeric: tabular-nums;
+    }
+    .sensitivity-table tr:last-child td { border-bottom: none; }
+    .sensitivity-table tr.is-target td { color: var(--hea-purple); font-weight: var(--hea-w-semibold); }
+    .sensitivity-table tr.is-target td:last-child { color: var(--hea-purple); }
+
+    /* ---- Course CTA ---- */
+    .course-cta {
+      margin-top: var(--hea-s-6);
+      background: rgba(33,191,61,0.07);
+      border: 1px solid rgba(33,191,61,0.25);
+      border-radius: var(--hea-r-md);
+      padding: var(--hea-s-5) var(--hea-s-6);
+    }
+    .course-cta-kicker {
+      font-size: var(--hea-text-xs);
+      font-weight: var(--hea-w-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #138C28;
+      margin: 0 0 var(--hea-s-2);
+    }
+    .course-cta p {
+      font-size: var(--hea-text-sm);
+      color: var(--hea-fg-2);
+      line-height: var(--hea-lh-normal);
+      margin: 0 0 var(--hea-s-4);
+    }
+    .course-cta a.hea-btn { display: inline-block; }
+
+    @media (max-width: 480px) {
+      .field-row        { grid-template-columns: 1fr; }
+      .duration-result  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="hea">
+
+  <header class="site-header">
+    <a href="index.html" class="brand-lockup">
+      <img src="assets/logo-icon.png" alt="" class="brand-logo">
+      <span class="brand-name">Holistic Email Marketing<em>Free optimisation tools</em></span>
+    </a>
+    <a href="index.html" class="back-link">← All Tools</a>
+  </header>
+
+  <main>
+    <div class="tool-page">
+
+      <header class="tool-header">
+        <span class="hea-pill hea-pill--foundation">● Foundation</span>
+        <h1>A/B Test Duration Calculator</h1>
+        <p class="lead">Before you start a test, find out how long to run it. Enter your baseline metric, the improvement you want to detect, and your daily send volume.</p>
+      </header>
+
+      <div class="tool-card">
+        <div class="field-group">
+          <label class="field-label" for="baselineRate">
+            Current metric (%)
+            <span style="font-weight:400;color:var(--hea-fg-3)"> — open rate, click rate, or conversion rate</span>
+          </label>
+          <input type="number" class="hea-input" id="baselineRate" placeholder="e.g. 25" min="0.1" max="99.9" step="0.1">
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="minEffect">
+              Minimum improvement to detect (%)
+              <span style="font-weight:400;color:var(--hea-fg-3)"> — relative</span>
+            </label>
+            <input type="number" class="hea-input" id="minEffect" placeholder="e.g. 10" min="1" max="200" step="1">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="dailySends">Daily sends per variant</label>
+            <input type="number" class="hea-input" id="dailySends" placeholder="e.g. 300" min="1" step="1">
+          </div>
+        </div>
+        <p class="error-msg" id="calc-error">Please enter valid values in all three fields.</p>
+        <button class="hea-btn hea-btn--primary" id="calc-btn" style="margin-top:var(--hea-s-2)">Calculate →</button>
+
+        <div class="results" id="calc-results">
+          <hr class="results-divider">
+
+          <div class="calc-warning calc-warning--red" id="warn-impractical"></div>
+          <div class="calc-warning calc-warning--amber" id="warn-long"></div>
+          <div class="calc-warning calc-warning--amber" id="warn-low-base"></div>
+          <div class="calc-warning calc-warning--amber" id="warn-high-mde"></div>
+
+          <p class="results-label">Your test requires</p>
+          <div class="duration-result">
+            <div class="duration-stat">
+              <p class="duration-stat-value" id="stat-sample">—</p>
+              <p class="duration-stat-label">Emails per variant</p>
+            </div>
+            <div class="duration-stat">
+              <p class="duration-stat-value" id="stat-days">—</p>
+              <p class="duration-stat-label">Days to run</p>
+            </div>
+          </div>
+
+          <hr class="results-divider">
+          <p class="results-label">What you can detect at different timeframes</p>
+          <table class="sensitivity-table" id="sensitivity-table">
+            <thead>
+              <tr>
+                <th>Timeframe</th>
+                <th>Emails per variant</th>
+                <th>Detectable improvement</th>
+              </tr>
+            </thead>
+            <tbody id="sensitivity-body"></tbody>
+          </table>
+
+          <div class="course-cta">
+            <p class="course-cta-kicker">Coming soon</p>
+            <p>The <strong>Foundation Email A/B Testing</strong> course covers test planning, sample sizing, and how to avoid the common mistakes that make results untrustworthy — including running tests for too long or too short. Join the waitlist to be first in line.</p>
+            <a href="https://holisticemailacademy.com/courses/foundation-email-a-b-testing/" class="hea-btn hea-btn--primary" target="_blank" rel="noopener">Join the waitlist →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <img src="assets/logo-icon.png" alt="" class="footer-logo">
+      <span class="footer-wordmark">Holistic Email Marketing</span>
+    </div>
+    <span class="footer-tagline">Smarter email starts here.</span>
+  </footer>
+
+  <script>
+    // Required sample size per variant using two-proportion z-test
+    // 95% confidence (z=1.96), 80% power (z=0.842)
+    const Z = Math.pow(1.96 + 0.842, 2); // 7.851
+
+    function sampleSize(p1, p2) {
+      const d = Math.abs(p2 - p1);
+      if (d === 0) return Infinity;
+      return Math.ceil(Z * (p1 * (1 - p1) + p2 * (1 - p2)) / (d * d));
+    }
+
+    // Minimum detectable absolute difference given n and baseline p1
+    // Approximation: d ≈ sqrt(Z * 2 * p(1-p) / n)
+    function minDetectableDiff(p1, n) {
+      return Math.sqrt(Z * 2 * p1 * (1 - p1) / n);
+    }
+
+    function fmt(n) {
+      return n.toLocaleString('en-GB');
+    }
+
+    function calculate() {
+      const baselineRate = parseFloat(document.getElementById('baselineRate').value);
+      const minEffect    = parseFloat(document.getElementById('minEffect').value);
+      const dailySends   = parseFloat(document.getElementById('dailySends').value);
+
+      const errorEl   = document.getElementById('calc-error');
+      const resultsEl = document.getElementById('calc-results');
+
+      if (isNaN(baselineRate) || isNaN(minEffect) || isNaN(dailySends) ||
+          baselineRate <= 0 || baselineRate >= 100 || minEffect <= 0 || dailySends < 1) {
+        errorEl.classList.add('visible');
+        resultsEl.classList.remove('visible');
+        return;
+      }
+      errorEl.classList.remove('visible');
+
+      const p1 = baselineRate / 100;
+      const p2 = p1 * (1 + minEffect / 100);
+      const n  = sampleSize(p1, Math.min(p2, 0.9999));
+      const days = Math.ceil(n / dailySends);
+
+      // Primary stats
+      document.getElementById('stat-sample').textContent = fmt(n);
+      document.getElementById('stat-days').textContent   = days >= 365 ? '365+' : String(days);
+
+      // Warnings
+      const warnImpractical = document.getElementById('warn-impractical');
+      const warnLong        = document.getElementById('warn-long');
+      const warnLowBase     = document.getElementById('warn-low-base');
+      const warnHighMde     = document.getElementById('warn-high-mde');
+
+      warnImpractical.classList.remove('visible');
+      warnLong.classList.remove('visible');
+      warnLowBase.classList.remove('visible');
+      warnHighMde.classList.remove('visible');
+
+      if (days > 365) {
+        warnImpractical.textContent = `At ${fmt(dailySends)} sends a day, detecting a ${minEffect}% improvement would take over a year. Consider accepting a larger minimum detectable effect, or increasing the proportion of your list in the test.`;
+        warnImpractical.classList.add('visible');
+      } else if (days > 90) {
+        warnLong.textContent = `This test would take over 90 days. Results can drift over that period due to seasonal changes, list churn, and external factors. Consider widening your minimum detectable effect to shorten the run time.`;
+        warnLong.classList.add('visible');
+      }
+
+      if (baselineRate < 1) {
+        warnLowBase.textContent = 'Very low baseline rates (under 1%) produce high variance and require very large samples. Make sure your metric is reliable before building a test around it.';
+        warnLowBase.classList.add('visible');
+      }
+
+      if (minEffect >= 50) {
+        warnHighMde.textContent = `You're looking for a ${minEffect}% relative improvement — a very large effect. Tests like this run quickly, but be cautious: if your results show gains that large, double-check for implementation errors before acting.`;
+        warnHighMde.classList.add('visible');
+      }
+
+      // Sensitivity table
+      const timeframes = [7, 14, 30, 60];
+      const targetDays = days;
+      const tbody = document.getElementById('sensitivity-body');
+
+      tbody.innerHTML = timeframes.map(tf => {
+        const nAtTf    = Math.floor(dailySends * tf);
+        const absDiff  = minDetectableDiff(p1, nAtTf);
+        const relDiff  = (absDiff / p1) * 100;
+        const isTarget = (tf === timeframes.reduce((prev, curr) =>
+          Math.abs(curr - targetDays) < Math.abs(prev - targetDays) ? curr : prev));
+
+        const relLabel = relDiff > 200 ? '>200%' : `±${relDiff.toFixed(1)}%`;
+        return `<tr${isTarget ? ' class="is-target"' : ''}>
+          <td>${tf} days</td>
+          <td>${fmt(nAtTf)}</td>
+          <td>${relLabel}</td>
+        </tr>`;
+      }).join('');
+
+      resultsEl.classList.add('visible');
+    }
+
+    document.getElementById('calc-btn').addEventListener('click', calculate);
+    ['baselineRate', 'minEffect', 'dailySends'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') calculate();
+      });
+    });
+  </script>
+
+</body>
+</html>
