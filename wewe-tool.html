@@ -189,50 +189,7 @@
     </div>
     <span class="footer-tagline">Smarter email starts here.</span>
   </footer>
-
-  <script>
-    function analyse() {
-      const text = document.getElementById('wewe-input').value.trim();
-      const errorEl = document.getElementById('wewe-error');
-      const resultsEl = document.getElementById('wewe-results');
-
-      if (!text) {
-        errorEl.classList.add('visible');
-        resultsEl.classList.remove('visible');
-        return;
-      }
-      errorEl.classList.remove('visible');
-
-      const words = text.toLowerCase().match(/\b(\w+)\b/g) || [];
-      let brand = 0, customer = 0;
-      words.forEach(w => {
-        if ('we us our my i me'.split(' ').includes(w)) brand++;
-        else if ('you your'.split(' ').includes(w)) customer++;
-      });
-
-      const total = brand + customer;
-      const brandPct = total > 0 ? Math.round(brand / total * 100) : 0;
-      const customerPct = total > 0 ? Math.round(customer / total * 100) : 0;
-
-      document.getElementById('brand-pct').textContent = brandPct + '%';
-      document.getElementById('customer-pct').textContent = customerPct + '%';
-      resultsEl.classList.add('visible');
-
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        document.getElementById('brand-bar').style.width = brandPct + '%';
-        document.getElementById('customer-bar').style.width = customerPct + '%';
-      }));
-
-      const tip = document.getElementById('wewe-tip');
-      brandPct > 60 ? tip.classList.add('visible') : tip.classList.remove('visible');
-      document.getElementById('wewe-consulting-cta').style.display = brandPct > 75 ? '' : 'none';
-    }
-
-    document.getElementById('wewe-btn').addEventListener('click', analyse);
-    document.getElementById('wewe-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter' && e.ctrlKey) analyse();
-    });
-  </script>
+  <script type="module" src="./src/tools/wewe.ts"></script>
 
 </body>
 </html>
