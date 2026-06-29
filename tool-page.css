@@ -112,6 +112,30 @@ html, body { margin: 0; padding: 0; }
 }
 .hea-textarea::placeholder { color: var(--hea-fg-3); }
 
+.hea-select {
+  font-family: var(--hea-font-sans);
+  font-size: var(--hea-text-base);
+  padding: 10px 18px;
+  border-radius: var(--hea-r-md);
+  border: 1.5px solid var(--hea-divider);
+  background: var(--hea-bg);
+  color: var(--hea-fg-1);
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+  transition: border var(--hea-dur-base) var(--hea-ease),
+              box-shadow var(--hea-dur-base) var(--hea-ease);
+}
+.hea-select:focus {
+  outline: none;
+  border-color: var(--hea-purple);
+  box-shadow: var(--hea-ring-focus);
+}
+
 /* ---- Validation ---- */
 .error-msg {
   display: none;
