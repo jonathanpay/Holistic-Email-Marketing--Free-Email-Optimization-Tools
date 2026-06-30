@@ -31,9 +31,8 @@ A collection of free, standalone email marketing tools built by Holistic Email M
 ### 9. Personalisation & Dynamic Content Checker
 **Make sure your tokens never break.** Select your email platform (16 ESPs supported across Liquid, HubL, Handlebars, Mailchimp, ActiveCampaign, Campaign Monitor, Omnisend, Dotdigital, MailerLite, SFMC, and Marketo syntaxes), paste your copy, and instantly see every personalisation token — whether each one has a fallback value for contacts with missing data, and whether your conditional blocks are balanced. Suggests fixes for tokens that are missing fallbacks.
 
-## Upcoming Tools (Planned)
-
-- Accessibility Checker — evaluates email HTML for accessibility compliance
+### 10. Email Accessibility Checker
+**Make sure every subscriber can read your email.** Paste your email's HTML and it's checked against common accessibility pitfalls: missing or filename-style image alt text, empty or vague link text (e.g. "click here"), font sizes below the 12px/14px accessibility floor, WCAG AA colour contrast against the nearest background, broken heading order, and a missing document language attribute. Flags issues by severity with plain-English fixes.
 
 ## Why Use These Tools?
 
@@ -41,3 +40,4 @@ A collection of free, standalone email marketing tools built by Holistic Email M
 - Enhance clarity with benefit-driven messaging
 - Optimise email effectiveness with audience-focused language
 - Make confident A/B testing decisions backed by statistical significance
+- Reach more subscribers with accessible, inclusive email markup
