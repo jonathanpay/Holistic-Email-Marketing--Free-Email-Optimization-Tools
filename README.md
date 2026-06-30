@@ -28,9 +28,11 @@ A collection of free, standalone email marketing tools built by Holistic Email M
 ### 8. A/B Test Duration Calculator
 **Know how long to run your test before you start.** Takes baseline metric (%), minimum relative improvement to detect, and daily sends per variant. Uses a two-proportion z-test (95% confidence, 80% power) to calculate required sample size and days. Includes a sensitivity table showing the smallest detectable improvement at 7, 14, 30, and 60 days, plus warnings for impractical durations and edge-case inputs. Links to the Foundation Email A/B Testing course waitlist.
 
+### 9. Personalisation & Dynamic Content Checker
+**Make sure your tokens never break.** Select your email platform (16 ESPs supported across Liquid, HubL, Handlebars, Mailchimp, ActiveCampaign, Campaign Monitor, Omnisend, Dotdigital, MailerLite, SFMC, and Marketo syntaxes), paste your copy, and instantly see every personalisation token — whether each one has a fallback value for contacts with missing data, and whether your conditional blocks are balanced. Suggests fixes for tokens that are missing fallbacks.
+
 ## Upcoming Tools (Planned)
 
-- Personalisation & Dynamic Content Checker — ensures personalisation tokens are properly implemented
 - Accessibility Checker — evaluates email HTML for accessibility compliance
 
 ## Why Use These Tools?
