@@ -15,6 +15,7 @@ export default defineConfig({
         abDuration:     resolve(__dirname, 'ab-duration-tool.html'),
         f2b:             resolve(__dirname, 'f2b-tool.html'),
         personalisation: resolve(__dirname, 'personalisation-tool.html'),
+        accessibility:   resolve(__dirname, 'accessibility-tool.html'),
       },
     },
   },
